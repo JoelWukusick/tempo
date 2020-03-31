@@ -5,7 +5,7 @@ const client = require('../server/spotify.js');
 
 app.use(express.static('dist'));
 
-app.get('/search', (req, res) => {
+app.get('/search/artist', (req, res) => {
   client.findArtist(req.query.q, 10)
     .then(result => {
       res.send(result.artists.items)
@@ -33,12 +33,12 @@ app.get('/artists/:artistId/tracks', (req, res) => {
       return client.getTracks(albumIds);
     })
     .then((results) => {
-      res.send(results.albums.map((album) => album.tracks.items.map((song) => { return { name: song.name, id: song.id } })));
+      return client.getTracksFeatures(results);
     })
-  // client.getTracks(req.params.artistId)
-  // .then(result => {
-  //   res.send(result.tracks)
-  // })
+    .then((tracks) => {
+      res.send(tracks)
+    })
 })
+
 
 app.listen(port, () => console.log(`Listening on port ${port}!`));

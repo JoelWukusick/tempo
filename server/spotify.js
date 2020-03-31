@@ -10,91 +10,96 @@ const getToken = (() => {
   }
 })();
 
-const constructQueryParam = (key, values) => {
-  let string = `${key}=`;
-  for (var i = 0; i < values.length && i < 20; i++) {
-    string += values[i]
-    if (i < values.length - 1 && i < 19 ) {
-      string += '%2C'
+const constructQueryParams = (key, values) => {
+  let paramStrings = [];
+  let paramString = `${key}=`;
+  for (var i = 0; i < values.length; i++) {
+    paramString += values[i]
+    if ((i + 1) % 20 === 0 || i + 1 === values.length) {
+      paramStrings.push(paramString);
+      paramString = `${key}=`;
+    } else {
+      paramString += '%2C'
     }
   }
-  console.log(string)
-  return string;
+  return paramStrings;
+}
+
+const getSpotify = async (url) => {
+  return getToken()
+    .then((token) => {
+      let options = {
+        method: 'get',
+        url,
+        headers: {
+          'Authorization': 'Bearer ' + token
+        },
+        json: true
+      };
+      return rp(options);
+    })
+    .catch((err) => {
+      console.log(err);
+      return [];
+    });
+}
+
+const getTrackBunch = async (paramString) => {
+  let url = `https://api.spotify.com/v1/albums?${paramString}`;
+  return getSpotify(url);
+}
+
+const getAllTracks = async (albumIds) => {
+  let paramStrings = constructQueryParams('ids', albumIds);
+  return Promise.all(paramStrings.map((paramString) => {
+    return getTrackBunch(paramString);
+  }))
+}
+
+const getTrackFeaturesBunch = async (paramString) => {
+  let url = `https://api.spotify.com/v1/audio-features?${paramString}`;
+  return getSpotify(url);
+}
+
+const getAllTracksFeatures = async (trackIds) => {
+  let paramStrings = constructQueryParams('ids', trackIds);
+  return Promise.all(paramStrings.map((paramString) => {
+    return getTrackFeaturesBunch(paramString);
+  }))
 }
 
 module.exports = {
   findArtist: async (q, limit) => {
-    return getToken()
-      .then((token) => {
-        let options = {
-          method: 'get',
-          url: `https://api.spotify.com/v1/search?q=${q}&type=artist${limit ? '&limit=' + limit : ''}`,
-          headers: {
-            'Authorization': 'Bearer ' + token
-          },
-          json: true
-        };
-        return rp(options);
-      })
-      .catch((err) => {
-        // console.log(err);
-        return [];
-      });
+    let url = `https://api.spotify.com/v1/search?q=${q}&type=artist${limit ? '&limit=' + limit : ''}`;
+    return getSpotify(url);
   },
   getTopTracks: async (artistId, limit) => {
-    return getToken()
-      .then((token) => {
-        let options = {
-          method: 'get',
-          url: `https://api.spotify.com/v1/artists/${artistId}/top-tracks?country=ES${limit ? '&limit=' + limit : ''}`,
-          headers: {
-            'Authorization': 'Bearer ' + token
-          },
-          json: true
-        };
-        return rp(options);
-      })
-      .catch((err) => {
-        // console.log(err);
-        return [];
-      });
+    let url = `https://api.spotify.com/v1/artists/${artistId}/top-tracks?market=US${limit ? '&limit=' + limit : ''}`;
+    return getSpotify(url);
   },
   getAlbums: async (artistId, limit) => {
-    return getToken()
-      .then((token) => {
-        let options = {
-          method: 'get',
-          url: `https://api.spotify.com/v1/artists/${artistId}/albums?country=ES${limit ? '&limit=' + limit : ''}`,
-          headers: {
-            'Authorization': 'Bearer ' + token
-          },
-          json: true
-        };
-        return rp(options);
-      })
-      .catch((err) => {
-        // console.log(err);
-        return [];
-      })
+    let url = `https://api.spotify.com/v1/artists/${artistId}/albums?market=US${limit ? '&limit=' + limit : ''}`;
+    return getSpotify(url);
   },
   getTracks: async (albumIds) => {
-    return getToken()
-      .then((token) => {
-        let paramString = constructQueryParam('ids', albumIds);
-        let options = {
-          method: 'get',
-          url: `https://api.spotify.com/v1/albums?${paramString}`,
-          headers: {
-            'Authorization': 'Bearer ' + token
-          },
-          json: true
-        };
-        console.log(options)
-        return rp(options);
+    return getAllTracks(albumIds)
+      .then(data => {
+        let albums = data.map(bunch => bunch.albums).flat();
+        let tracks = albums.map(album => album.tracks.items).flat();
+        tracks = tracks.map(track => { return { name: track.name, id: track.id } });
+        return tracks;
       })
-      .catch((err) => {
-        console.log(err);
-        return [];
+  },
+  getTracksFeatures: async (tracks) => {
+    let trackIds = tracks.map(track => track.id);
+    return getAllTracksFeatures(trackIds)
+      .then(data => {
+        data = data.map(bunch => bunch.audio_features).flat();
+        for (var i = 0; i < tracks.length; i++) {
+          tracks[i].features = data[i];
+        }
+        return tracks;
       })
   }
 }
+
