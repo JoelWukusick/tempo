@@ -10,7 +10,27 @@ const getToken = (() => {
   }
 })();
 
-const constructQueryParams = (key, values) => {
+const constructQueryParams = (paramsObject) => {
+  let paramsString = '';
+  for (var i in paramsObject) {
+    paramsString += `${i}=`;
+    // if (paramsObject[i].length > 1){
+    //   for (var x = 0; x < paramsObject[i].length; x++) {
+    //     paramsString += paramsObject[i][x];
+    //     if (x < paramsObject[i].length - 1) {
+    //       paramsString += '%2C';
+    //     }
+    //   }
+    // } else {
+      paramsString += paramsObject[i];
+    // }
+    paramsString += '&';
+  }
+  paramsString = paramsString.substring(0, paramsString.length - 1);
+  return(paramsString);
+}
+
+const constructBatchParams = (key, values) => {
   let paramStrings = [];
   let paramString = `${key}=`;
   for (var i = 0; i < values.length; i++) {
@@ -50,7 +70,7 @@ const getTrackBunch = async (paramString) => {
 }
 
 const getAllTracks = async (albumIds) => {
-  let paramStrings = constructQueryParams('ids', albumIds);
+  let paramStrings = constructBatchParams('ids', albumIds);
   return Promise.all(paramStrings.map((paramString) => {
     return getTrackBunch(paramString);
   }))
@@ -62,7 +82,7 @@ const getTrackFeaturesBunch = async (paramString) => {
 }
 
 const getAllTracksFeatures = async (trackIds) => {
-  let paramStrings = constructQueryParams('ids', trackIds);
+  let paramStrings = constructBatchParams('ids', trackIds);
   return Promise.all(paramStrings.map((paramString) => {
     return getTrackFeaturesBunch(paramString);
   }))
@@ -100,6 +120,11 @@ module.exports = {
         }
         return tracks;
       })
+  },
+  getRecommendations: async (paramsObject) => {
+    let paramsString = constructQueryParams(paramsObject);
+    let url = `https://api.spotify.com/v1/recommendations?market=US&${paramsString}`;
+    return getSpotify(url);
   }
 }
 

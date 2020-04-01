@@ -12,6 +12,13 @@ app.get('/search/artist', (req, res) => {
     });
 })
 
+app.get('/recommendations', (req, res) => {
+  client.getRecommendations(req.query)
+    .then(results => res.send(results.tracks.map(track => {
+      return { name: track.name, id: track.id, thumb: track.album.images[2].url };
+    })));
+})
+
 app.get('/artists/:artistId/top-tracks', (req, res) => {
   client.getTopTracks(req.params.artistId, 50)
     .then(result => {
