@@ -5,6 +5,31 @@ const client = require('../server/spotify.js');
 
 app.use(express.static('dist'));
 
+app.get('/search', (req, res) => {
+  if (req.query.type === 'genre') {
+    client.getGenreSeeds()
+      .then(data => {
+        let genres = data.genres.filter(genre => genre.startsWith(req.query.q));
+        res.send(genres);
+      })
+  } else {
+    client.search(req.query)
+      .then(data => {
+        let results = { type: req.query.type };
+        if (req.query.type === 'artist' ) {
+          results.items = (data.artists.items.map(artist => {
+            return { name: artist.name, id: artist.id, images: artist.images }
+          }))
+        } else {
+          results.items = (data.tracks.items.map(track => {
+            return { name: track.name, id: track.id, images: track.album.images, artists: track.artists }
+          }))
+        }
+        res.send(results)
+      })
+  }
+})
+
 app.get('/search/artist', (req, res) => {
   client.findArtist(req.query.q, 10)
     .then(result => {

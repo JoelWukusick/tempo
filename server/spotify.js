@@ -1,6 +1,16 @@
 const { tokenAsync } = require('../spotify/clientAuth.js');
-var rp = require('request-promise-native');
+const rp = require('request-promise-native');
+const queryString = require('query-string');
 
+
+const memoize = ((method) => {
+  let cache = {};
+  return async () => {
+    let args = arguments;
+    cache[args] = cache[args] || method.apply(this, arguments);
+    return cache[args];
+  }
+})
 
 const getToken = (() => {
   let token;
@@ -14,20 +24,11 @@ const constructQueryParams = (paramsObject) => {
   let paramsString = '';
   for (var i in paramsObject) {
     paramsString += `${i}=`;
-    // if (paramsObject[i].length > 1){
-    //   for (var x = 0; x < paramsObject[i].length; x++) {
-    //     paramsString += paramsObject[i][x];
-    //     if (x < paramsObject[i].length - 1) {
-    //       paramsString += '%2C';
-    //     }
-    //   }
-    // } else {
-      paramsString += paramsObject[i];
-    // }
+    paramsString += paramsObject[i];
     paramsString += '&';
   }
   paramsString = paramsString.substring(0, paramsString.length - 1);
-  return(paramsString);
+  return (paramsString);
 }
 
 const constructBatchParams = (key, values) => {
@@ -93,12 +94,16 @@ module.exports = {
     let url = `https://api.spotify.com/v1/search?q=${q}&type=artist${limit ? '&limit=' + limit : ''}`;
     return getSpotify(url);
   },
-  getTopTracks: async (artistId, limit) => {
-    let url = `https://api.spotify.com/v1/artists/${artistId}/top-tracks?market=US${limit ? '&limit=' + limit : ''}`;
-    return getSpotify(url);
-  },
   getAlbums: async (artistId, limit) => {
     let url = `https://api.spotify.com/v1/artists/${artistId}/albums?market=US${limit ? '&limit=' + limit : ''}`;
+    return getSpotify(url);
+  },
+  getGenreSeeds: memoize(async () => {
+    let url = 'https://api.spotify.com/v1/recommendations/available-genre-seeds';
+    return getSpotify(url);
+  }),
+  getTopTracks: async (artistId, limit) => {
+    let url = `https://api.spotify.com/v1/artists/${artistId}/top-tracks?market=US${limit ? '&limit=' + limit : ''}`;
     return getSpotify(url);
   },
   getTracks: async (albumIds) => {
@@ -124,6 +129,11 @@ module.exports = {
   getRecommendations: async (paramsObject) => {
     let paramsString = constructQueryParams(paramsObject);
     let url = `https://api.spotify.com/v1/recommendations?market=US&${paramsString}`;
+    return getSpotify(url);
+  },
+  search: async (params) => {
+    let paramsString = queryString.stringify(params);
+    let url = `https://api.spotify.com/v1/search?${paramsString}`;
     return getSpotify(url);
   }
 }
