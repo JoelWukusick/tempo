@@ -11,17 +11,6 @@ const getToken = (() => {
   }
 })();
 
-const constructQueryParams = (paramsObject) => {
-  let paramsString = '';
-  for (var i in paramsObject) {
-    paramsString += `${i}=`;
-    paramsString += paramsObject[i];
-    paramsString += '&';
-  }
-  paramsString = paramsString.substring(0, paramsString.length - 1);
-  return (paramsString);
-}
-
 const constructBatchParams = (key, values) => {
   let paramStrings = [];
   let paramString = `${key}=`;
@@ -118,12 +107,11 @@ module.exports = {
       })
   },
   getRecommendations: async (paramsObject) => {
-    let paramsString = constructQueryParams(paramsObject);
+    let paramsString = queryString.stringify(paramsObject);
     let url = `https://api.spotify.com/v1/recommendations?market=US&${paramsString}`;
     return getSpotify(url);
   },
   search: async (params) => {
-    console.log('searching')
     let paramsString = queryString.stringify(params);
     let url = `https://api.spotify.com/v1/search?${paramsString}`;
     return getSpotify(url);

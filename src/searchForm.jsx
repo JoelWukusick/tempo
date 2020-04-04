@@ -19,7 +19,6 @@ function SearchForm() {
   }
 
   function handleSubmit(event) {
-    console.log('handle submit')
     let stringifiedQuery = queryString.stringify({ type, q });
     axios({
       method: 'get',
