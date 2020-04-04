@@ -2,31 +2,39 @@ const express = require('express');
 const app = express();
 const port = 3000;
 const client = require('../server/spotify.js');
-
+const cache = {};
 app.use(express.static('dist'));
 
 app.get('/search', (req, res) => {
-  if (req.query.type === 'genre') {
-    client.getGenreSeeds()
-      .then(data => {
-        let genres = data.genres.filter(genre => genre.startsWith(req.query.q));
-        res.send(genres);
-      })
+  let query = JSON.stringify(req.query);
+  if (cache[query]) {
+    res.send(cache[query])
   } else {
-    client.search(req.query)
-      .then(data => {
-        let results = { type: req.query.type };
-        if (req.query.type === 'artist' ) {
-          results.items = (data.artists.items.map(artist => {
-            return { name: artist.name, id: artist.id, images: artist.images }
-          }))
-        } else {
-          results.items = (data.tracks.items.map(track => {
-            return { name: track.name, id: track.id, images: track.album.images, artists: track.artists }
-          }))
-        }
-        res.send(results)
-      })
+    if (req.query.type === 'genre') {
+      client.getGenreSeeds()
+        .then(data => {
+          let results = { type: req.query.type };
+          results.items = data.genres.filter(genre => genre.startsWith(req.query.q));
+          cache[query] = results;
+          res.send(results)
+        })
+    } else {
+      client.search(req.query)
+        .then(data => {
+          let results = { type: req.query.type };
+          if (req.query.type === 'artist') {
+            results.items = (data.artists.items.map(artist => {
+              return { name: artist.name, id: artist.id, images: artist.images }
+            }))
+          } else {
+            results.items = (data.tracks.items.map(track => {
+              return { name: track.name, id: track.id, images: track.album.images, artists: track.artists }
+            }))
+          }
+          cache[query] = results;
+          res.send(results)
+        })
+    }
   }
 })
 

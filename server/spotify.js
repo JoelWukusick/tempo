@@ -3,15 +3,6 @@ const rp = require('request-promise-native');
 const queryString = require('query-string');
 
 
-const memoize = ((method) => {
-  let cache = {};
-  return async () => {
-    let args = arguments;
-    cache[args] = cache[args] || method.apply(this, arguments);
-    return cache[args];
-  }
-})
-
 const getToken = (() => {
   let token;
   return async () => {
@@ -98,10 +89,10 @@ module.exports = {
     let url = `https://api.spotify.com/v1/artists/${artistId}/albums?market=US${limit ? '&limit=' + limit : ''}`;
     return getSpotify(url);
   },
-  getGenreSeeds: memoize(async () => {
+  getGenreSeeds: async () => {
     let url = 'https://api.spotify.com/v1/recommendations/available-genre-seeds';
     return getSpotify(url);
-  }),
+  },
   getTopTracks: async (artistId, limit) => {
     let url = `https://api.spotify.com/v1/artists/${artistId}/top-tracks?market=US${limit ? '&limit=' + limit : ''}`;
     return getSpotify(url);
@@ -132,6 +123,7 @@ module.exports = {
     return getSpotify(url);
   },
   search: async (params) => {
+    console.log('searching')
     let paramsString = queryString.stringify(params);
     let url = `https://api.spotify.com/v1/search?${paramsString}`;
     return getSpotify(url);
