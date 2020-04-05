@@ -3,27 +3,33 @@ import styled from 'styled-components';
 
 
 const Container = styled.div`
+  padding: 5px;
 `
 
-const Info = styled.div`
+const ImageContainer = styled.img`
+  vertical-align: middle;
+`
+
+const Info = styled.span`
   display: inline-block;
-  margin: auto;
+  vertical-align: middle;
+  padding-left: 5px;
 `
 
 const Artist = styled.p`
-  margin: 5px;
+  display: inline;
+  margin: auto;
   font-weight: 300;
-  display: inline-block;
 `
 const Name = styled.p`
-  margin: 5px;
+  margin: auto;
   font-weight: 600;
 `
 
 function Track({ track }) {
   return (
     <Container className='track'>
-      <img src={track.images[2] ? track.images[2].url : null} alt='image' height='50' width='50' />
+      <ImageContainer src={track.images[2] ? track.images[2].url : null} alt='image' height='50' width='50' />
       <Info>
         <Name>
           {track.name}
