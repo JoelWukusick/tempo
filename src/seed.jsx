@@ -34,8 +34,6 @@ function Seed() {
     seed[type].push(item);
     seed.items.push(item);
     if (seed.items.length > 5) {
-      console.log('over 5')
-      console.log(seed.items)
       let removeType = seed.items[0].type;
       seed[removeType].shift();
       seed.items.shift();
