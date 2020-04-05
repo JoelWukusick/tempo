@@ -11,7 +11,7 @@ function Seed() {
   const [q, setQ] = useState('');
   const [type, setType] = useState('artist');
   const [results, setResults] = useState({ type: null, items: [] });
-  const [seed, setSeed] = useState({ seed_artists: [], seed_tracks: [], seed_genres: [], items: [] })
+  const [seed, setSeed] = useState({ artist: [], track: [], genre: [], items: [] })
 
   function validateForm() {
     return q.length > 0;
@@ -23,7 +23,6 @@ function Seed() {
       method: 'get',
       url: `/search?${stringifiedQuery}`,
       json: true
-
     })
       .then(results => {
         setResults(results.data)
@@ -31,19 +30,19 @@ function Seed() {
     event.preventDefault();
   }
 
-  function handleAdd(e, value, type) {
-    let currentSeed = seed;
-    let stack = currentSeed.items;
-    currentSeed[type].push(value);
-    stack.push(value);
-    console.log(stack.value);
-    if (stack.length > 5) {
-      let removeType = stack[0].type;
-      currentSeed[removeType].shift();
-      stack.shift();
+  function handleAdd(e, item) {
+    seed[type].push(item);
+    seed.items.push(item);
+    if (seed.items.length > 5) {
+      console.log('over 5')
+      console.log(seed.items)
+      let removeType = seed.items[0].type;
+      seed[removeType].shift();
+      seed.items.shift();
     }
-    setSeed(currentSeed);
+    setSeed(Object.assign({}, seed));
   }
+
 
   return (
     <div>

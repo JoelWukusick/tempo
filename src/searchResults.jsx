@@ -18,7 +18,7 @@ function SearchResults({ data, handleAdd }) {
           if (item.type === 'genre' || item.type === 'seed_genres') {
             console.log(item)
             return (
-              <div onClick={(e) => handleAdd(e, item, 'seed_genres')} >
+              <div onClick={(e) => handleAdd(e, item)} >
                 <h4 >
                   {item.name}
                 </h4>
@@ -26,11 +26,11 @@ function SearchResults({ data, handleAdd }) {
             )
           } else if (item.type === 'artist' || item.type === 'seed_artists') {
             return (
-              <Artist artist={item} handleAdd={e => handleAdd(e, item, 'seed_artists')} />
+              <Artist artist={item} handleAdd={e => handleAdd(e, item)} />
             )
           } else if (item.type === 'track' || item.type === 'seed_tracks') {
             return (
-              <Track track={item} handleAdd={e => handleAdd(e, item, 'seed_tracks')}/>
+              <Track track={item} handleAdd={e => handleAdd(e, item)}/>
             )
           }
         })}
