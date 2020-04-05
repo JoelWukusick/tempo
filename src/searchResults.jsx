@@ -10,26 +10,27 @@ const Container = styled.div`
 
 `
 
-function SearchResults({ data }) {
+function SearchResults({ data, handleAdd }) {
   return (
     <Container>
       <Main >
         {data.items.map((item, i) => {
-          if (data.type === 'genre') {
+          if (item.type === 'genre' || item.type === 'seed_genres') {
+            console.log(item)
             return (
-              <div>
-                <h4>
-                  {item}
+              <div onClick={(e) => handleAdd(e, item, 'seed_genres')} >
+                <h4 >
+                  {item.name}
                 </h4>
               </div>
             )
-          } else if (data.type === 'artist') {
+          } else if (item.type === 'artist' || item.type === 'seed_artists') {
             return (
-              <Artist artist={item} />
+              <Artist artist={item} handleAdd={e => handleAdd(e, item, 'seed_artists')} />
             )
-          } else if (data.type === 'track') {
+          } else if (item.type === 'track' || item.type === 'seed_tracks') {
             return (
-              <Track track={item} />
+              <Track track={item} handleAdd={e => handleAdd(e, item, 'seed_tracks')}/>
             )
           }
         })}

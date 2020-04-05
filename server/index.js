@@ -15,6 +15,7 @@ app.get('/search', (req, res) => {
         .then(data => {
           let results = { type: req.query.type };
           results.items = data.genres.filter(genre => genre.startsWith(req.query.q));
+          results.items = results.items.map(item => { return { type: 'genre', name: item } })
           cache[query] = results;
           res.send(results)
         })
@@ -24,11 +25,11 @@ app.get('/search', (req, res) => {
           let results = { type: req.query.type };
           if (req.query.type === 'artist') {
             results.items = (data.artists.items.map(artist => {
-              return { name: artist.name, id: artist.id, images: artist.images }
+              return { name: artist.name, id: artist.id, images: artist.images, type: artist.type }
             }))
           } else {
             results.items = (data.tracks.items.map(track => {
-              return { name: track.name, id: track.id, images: track.album.images, artists: track.artists }
+              return { name: track.name, id: track.id, images: track.album.images, artists: track.artists, type: track.type }
             }))
           }
           cache[query] = results;

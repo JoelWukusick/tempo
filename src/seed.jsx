@@ -11,7 +11,7 @@ function Seed() {
   const [q, setQ] = useState('');
   const [type, setType] = useState('artist');
   const [results, setResults] = useState({ type: null, items: [] });
-  const [seed, setSeed] = useState({ seed_artists: [], seed_tracks: [], seed_genres: [] })
+  const [seed, setSeed] = useState({ seed_artists: [], seed_tracks: [], seed_genres: [], items: [] })
 
   function validateForm() {
     return q.length > 0;
@@ -31,16 +31,26 @@ function Seed() {
     event.preventDefault();
   }
 
-  function handleAdd() {
-
+  function handleAdd(e, value, type) {
+    let currentSeed = seed;
+    let stack = currentSeed.items;
+    currentSeed[type].push(value);
+    stack.push(value);
+    console.log(stack.value);
+    if (stack.length > 5) {
+      let removeType = stack[0].type;
+      currentSeed[removeType].shift();
+      stack.shift();
+    }
+    setSeed(currentSeed);
   }
 
   return (
     <div>
       <SearchForm handleSubmit={handleSubmit} validateForm={validateForm} setType={setType} setQ={setQ} type={type} q={q} />
-      <SearchResults data={results} />
+      <SearchResults data={results} handleAdd={handleAdd} />
       <SeedOptions />
-      <SeedSelections />
+      <SeedSelections data={seed} />
     </div>
   )
 }

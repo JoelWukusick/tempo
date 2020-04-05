@@ -16,31 +16,36 @@ const Info = styled.span`
   padding-left: 5px;
 `
 
+const Artists = styled.div`
+  display: inline;
+`
+
 const Artist = styled.p`
   display: inline;
   margin: auto;
   font-weight: 300;
 `
+
 const Name = styled.p`
   margin: auto;
   font-weight: 600;
 `
 
-function Track({ track }) {
+function Track({ track, handleAdd }) {
   return (
-    <Container className='track'>
+    <Container className='track' onClick={handleAdd}>
       <ImageContainer src={track.images[2] ? track.images[2].url : null} alt='image' height='50' width='50' />
       <Info>
         <Name>
           {track.name}
         </Name>
-        <Artist>
+        <Artists>
           {track.artists.map((artist, i, artists) => {
             return (
               <Artist>{i === artists.length - 1 ? `${artist.name}` : `${artist.name}, `}</Artist>
             )
           })}
-        </Artist>
+        </Artists>
       </Info>
     </Container>
   );

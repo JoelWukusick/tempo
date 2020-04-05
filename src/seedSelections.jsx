@@ -1,15 +1,17 @@
 import React from "react";
 import styled from 'styled-components';
+import SearchResults from './searchResults.jsx';
 
 
 const Container = styled.div`
 `
 
 
-function SeedSelections({  }) {
+function SeedSelections({ data }) {
+
   return (
     <Container>
-      seed selections
+      <SearchResults data={data} handleAdd={() => {}}/>
     </Container>
   );
 }

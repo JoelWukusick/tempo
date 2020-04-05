@@ -21,9 +21,9 @@ const Name = styled.p`
   font-weight: 600;
 `
 
-function Artist({ artist }) {
+function Artist({ artist, handleAdd }) {
   return (
-    <Container className='track'>
+    <Container className='track' onClick={handleAdd}>
       <ImageContainer src={artist.images[2] ? artist.images[2].url : null} onerror="this.onerror=null; this.src='https://tempoimages.s3.us-east-2.amazonaws.com/blank.jpg'" height='50' width='50' />
       <Info>
         <Name>
