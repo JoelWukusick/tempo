@@ -1,40 +1,20 @@
 import React, { useState } from "react";
 import styled from 'styled-components';
 import Results from './searchResults.jsx';
-const queryString = require('query-string');
-const axios = require('axios');
+
 
 const SearchContainer = styled.div`
-  padding: 100px;
-  text-align: center;
-  `
+`
 
-function SearchForm() {
-  const [q, setQ] = useState('');
-  const [type, setType] = useState('artist');
-  const [results, setResults] = useState({ type: null, items: [] });
+function SearchForm({ handleSubmit, validateForm, setType, setQ, type, q }) {
+
 
   function validateForm() {
     return q.length > 0;
   }
 
-  function handleSubmit(event) {
-    let stringifiedQuery = queryString.stringify({ type, q });
-    axios({
-      method: 'get',
-      url: `/search?${stringifiedQuery}`,
-      json: true
-
-    })
-      .then(results => {
-        setResults(results.data)
-      });
-    event.preventDefault();
-  }
-
 
   return (
-    <div>
       <SearchContainer className="Login">
         <form onSubmit={handleSubmit}>
           <label>Search For:</label>
@@ -55,8 +35,6 @@ function SearchForm() {
           </button>
         </form>
       </SearchContainer>
-      <Results data={results} />
-    </div>
   );
 }
 

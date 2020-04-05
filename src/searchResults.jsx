@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import Track from './track.jsx';
+import Artist from './artist.jsx';
 
 const Main = styled.div`
 
@@ -9,8 +11,6 @@ const Container = styled.div`
 `
 
 function SearchResults({ data }) {
-
-
   return (
     <Container>
       <Main >
@@ -25,21 +25,11 @@ function SearchResults({ data }) {
             )
           } else if (data.type === 'artist') {
             return (
-              <div>
-                <img src={item.images[2] ? item.images[2].url : null} alt='image' height='60' width='60' />
-                <h4>
-                  {item.name}
-                </h4>
-              </div>
+              <Artist artist={item} />
             )
           } else if (data.type === 'track') {
             return (
-              <div>
-              <img src={item.images[2] ? item.images[2].url : null} alt='image' height='60' width='60' />
-              <h4>
-                {item.name}
-              </h4>
-            </div>
+              <Track track={item} />
             )
           }
         })}
