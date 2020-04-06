@@ -1,21 +1,13 @@
 import React from "react";
 import styled from 'styled-components';
-import { Range } from 'rc-slider';
-import 'rc-slider/assets/index.css';
+import Slider from './slider.jsx';
 
 const Container = styled.div`
   padding: 10px;
 `
 
-const Title = styled.div`
-  padding: 8px 0px ;
-`
 
-const SliderContainer = styled.div`
-  padding: 0px 0px 20px;
-`
-
-const marks = {
+const tempoMarks = {
   60: '60',
   70: '70',
   80: '80',
@@ -28,49 +20,57 @@ const marks = {
   150: '150',
   160: '160',
   170: '170',
-  180: '180',
-  // 100: {
-  //   style: {
-  //     color: 'red',
-  //   },
-  //   label: <strong>100°C</strong>,
-  // },
+  180: '180'
 };
 
-function log(value) {
-  console.log(value); //eslint-disable-line
+const marks = {
+  0: 0,
+  1: 10
 }
 
-function SeedOptions({ }) {
+
+function SeedOptions({ handleSlide }) {
   return (
     <Container>
-      <Title>
-        Tempo
-      </Title>
-      <SliderContainer>
-        <Range
-          min={55}
-          max={185}
-          defaultValue={[136, 142]}
-          ariaValueTextFormatterGroupForHandles={[value => `${value}`]}
-          pushable={4}
-          marks={marks} onChange={log} />
-      </SliderContainer>
-      <Title>
-        Danceability
-      </Title>
-      <SliderContainer>
-        <Range />
-      </SliderContainer>
-      <Title>
-        Energy
-      </Title>
-      <SliderContainer>
-        <Range />
-      </SliderContainer>
-      <SliderContainer>
-        <Range />
-      </SliderContainer>
+      <Slider
+        title='Tempo'
+        id='tempo'
+        min={60}
+        max={180}
+        defaultValue={[136, 142]}
+        pushable={5}
+        marks={tempoMarks}
+        handleSlide={handleSlide} />
+      <Slider
+        title='Danceability'
+        id='danceability'
+        min={0}
+        max={1}
+        defaultValue={[0.5, 1]}
+        step={.01}
+        pushable={.1}
+        marks={marks}
+        handleSlide={handleSlide} />
+      <Slider
+        title='Energy'
+        id='energy'
+        min={0}
+        max={1}
+        defaultValue={[0.4, 1]}
+        step={.01}
+        pushable={.1}
+        marks={marks}
+        handleSlide={handleSlide} />
+      <Slider
+        title='Cheerfulness'
+        id='valence'
+        min={0}
+        max={1}
+        defaultValue={[0, 1]}
+        step={.01}
+        pushable={.1}
+        marks={marks}
+        handleSlide={handleSlide} />
     </Container>
   );
 }

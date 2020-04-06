@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Track from './track.jsx';
 import Artist from './artist.jsx';
+import Genre from './genre.jsx';
 
 const Main = styled.div`
 
@@ -14,14 +15,10 @@ function SearchResults({ data, handleAdd }) {
   return (
     <Container>
       <Main >
-        {data.items.map((item, i) => {
+        {data.map((item, i) => {
           if (item.type === 'genre') {
             return (
-              <div onClick={(e) => handleAdd(e, item)} >
-                <h4 >
-                  {item.name}
-                </h4>
-              </div>
+              <Genre genre={item} handleAdd={e => handleAdd(e, item)} />
             )
           } else if (item.type === 'artist') {
             return (

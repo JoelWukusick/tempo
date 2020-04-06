@@ -8,7 +8,6 @@ const Container = styled.div`
 
 
 function SeedSelections({ data }) {
-
   return (
     <Container>
       <SearchResults data={data} handleAdd={() => {}}/>

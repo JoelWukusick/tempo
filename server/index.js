@@ -13,22 +13,21 @@ app.get('/search', (req, res) => {
     if (req.query.type === 'genre') {
       client.getGenreSeeds()
         .then(data => {
-          let results = { type: req.query.type };
-          results.items = data.genres.filter(genre => genre.startsWith(req.query.q));
-          results.items = results.items.map(item => { return { type: 'genre', name: item } })
+          let results = data.genres.filter(genre => genre.startsWith(req.query.q));
+          results = results.map(item => { return { type: 'genre', name: item } })
           cache[query] = results;
           res.send(results)
         })
     } else {
       client.search(req.query)
         .then(data => {
-          let results = { type: req.query.type };
+          let results;
           if (req.query.type === 'artist') {
-            results.items = (data.artists.items.map(artist => {
+            results = (data.artists.items.map(artist => {
               return { name: artist.name, id: artist.id, images: artist.images, type: artist.type }
             }))
           } else {
-            results.items = (data.tracks.items.map(track => {
+            results = (data.tracks.items.map(track => {
               return { name: track.name, id: track.id, images: track.album.images, artists: track.artists, type: track.type }
             }))
           }
@@ -39,18 +38,27 @@ app.get('/search', (req, res) => {
   }
 })
 
+app.get('/recommendations', (req, res) => {
+  let query = JSON.stringify(req.query);
+  if (cache[query]) {
+    res.send(cache[query])
+  } else {
+    client.getRecommendations(req.query)
+      .then(results => {
+        results = results.tracks.map(track => {
+          return { artists: track.artists, type: 'track', name: track.name, id: track.id, images: track.album.images };
+        });
+        cache[query] = results;
+        res.send(results)
+      });
+  }
+})
+
 app.get('/search/artist', (req, res) => {
   client.findArtist(req.query.q, 10)
     .then(result => {
       res.send(result.artists.items)
     });
-})
-
-app.get('/recommendations', (req, res) => {
-  client.getRecommendations(req.query)
-    .then(results => res.send(results.tracks.map(track => {
-      return { name: track.name, id: track.id, thumb: track.album.images[2].url };
-    })));
 })
 
 app.get('/artists/:artistId/top-tracks', (req, res) => {
