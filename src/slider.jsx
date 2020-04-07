@@ -4,18 +4,19 @@ import { Range } from 'rc-slider';
 import 'rc-slider/assets/index.css';
 
 const Container = styled.div`
-  margin: 40px 0px;
+  margin: 0px 0px 40px;
 `
 
 
 const Title = styled.div`
   /* padding: 8px 0px; */
+  text-align: left;
   display: inline-block;
+  width: 18%;
 `
 
 const SliderContainer = styled.div`
   width: 80%;
-  vertical-align: middle;
   float: right;
 `
 

@@ -5,7 +5,11 @@ const queryString = require('query-string');
 
 const getToken = (() => {
   let token;
-  return async () => {
+  return async (refresh) => {
+    if (refresh) {
+      token = tokenAsync();
+      return token;
+    }
     token = token || tokenAsync();
     return token;
   }
@@ -40,6 +44,25 @@ const getSpotify = async (url) => {
       return rp(options);
     })
     .catch((err) => {
+      if (err.statusCode === 401) {
+        console.log('resetting token')
+        return getToken(true)
+          .then((token) => {
+            let options = {
+              method: 'get',
+              url,
+              headers: {
+                'Authorization': 'Bearer ' + token
+              },
+              json: true
+            };
+            return rp(options);
+          })
+          .catch((err) => {
+            console.log(err);
+            return [];
+          });
+      }
       console.log(err);
       return [];
     });

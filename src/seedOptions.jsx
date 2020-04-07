@@ -37,7 +37,7 @@ function SeedOptions({ handleSlide }) {
         id='tempo'
         min={60}
         max={180}
-        defaultValue={[136, 142]}
+        defaultValue={[135, 143]}
         pushable={5}
         marks={tempoMarks}
         handleSlide={handleSlide} />

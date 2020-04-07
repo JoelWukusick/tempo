@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 const Container = styled.div`
   padding: 5px;
+  cursor: ${props => props.removeSeed ? '' : 'pointer'};
 `
 
 const ImageContainer = styled.img`
@@ -31,9 +32,15 @@ const Name = styled.p`
   font-weight: 600;
 `
 
-function Track({ track, handleAdd }) {
+const RemoveButton = styled.button`
+  text-align: right;
+  display: inline;
+  vertical-align: middle;
+`
+
+function Track({ track, handleAdd, removeSeed }) {
   return (
-    <Container className='track' onClick={handleAdd}>
+    <Container removeSeed={removeSeed} className='track' onClick={handleAdd} removeSeed={removeSeed}>
       <ImageContainer src={track.images[2] ? track.images[2].url : null} alt='image' height='50' width='50' />
       <Info>
         <Name>
@@ -47,6 +54,7 @@ function Track({ track, handleAdd }) {
           })}
         </Artists>
       </Info>
+      {removeSeed ? <RemoveButton onClick={() => removeSeed(track)}>remove</RemoveButton> : null}
     </Container>
   );
 }

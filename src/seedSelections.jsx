@@ -7,10 +7,10 @@ const Container = styled.div`
 `
 
 
-function SeedSelections({ data }) {
+function SeedSelections({ data, removeSeed }) {
   return (
     <Container>
-      <SearchResults data={data} handleAdd={() => {}}/>
+      <SearchResults data={data} handleAdd={() => { }} removeSeed={removeSeed} />
     </Container>
   );
 }

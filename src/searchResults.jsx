@@ -11,22 +11,22 @@ const Container = styled.div`
 
 `
 
-function SearchResults({ data, handleAdd }) {
+function SearchResults({ data, handleAdd, removeSeed }) {
   return (
     <Container>
       <Main >
         {data.map((item, i) => {
           if (item.type === 'genre') {
             return (
-              <Genre genre={item} handleAdd={e => handleAdd(e, item)} />
+              <Genre removeSeed={removeSeed || null} genre={item} handleAdd={() => handleAdd(item)} />
             )
           } else if (item.type === 'artist') {
             return (
-              <Artist artist={item} handleAdd={e => handleAdd(e, item)} />
+              <Artist removeSeed={removeSeed || null} artist={item} handleAdd={() => handleAdd(item)} />
             )
           } else if (item.type === 'track') {
             return (
-              <Track track={item} handleAdd={e => handleAdd(e, item)}/>
+              <Track removeSeed={removeSeed || null} track={item} handleAdd={() => handleAdd(item)}/>
             )
           }
         })}

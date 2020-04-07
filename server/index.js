@@ -50,7 +50,11 @@ app.get('/recommendations', (req, res) => {
         });
         cache[query] = results;
         res.send(results)
-      });
+      })
+      .catch((err) => {
+        console.log( err );
+        res.send([])
+      })
   }
 })
 
