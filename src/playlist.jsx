@@ -15,7 +15,7 @@ function Playlist({ data }) {
       <Main >
         {data.map((item, i) => {
           return (
-            <Track track={item} handleAdd={() => {}} />
+            <Track track={item} handleAdd={() => { }} isPlaylist={true} />
           )
         })}
       </Main>

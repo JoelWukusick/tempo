@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const Container = styled.div`
   padding: 5px;
-  cursor: ${props => props.removeSeed ? '' : 'pointer'};
+  cursor: ${props => props.removeSeed ? '' : props.isPlaylist ? '' : 'pointer'};
 `
 
 const ImageContainer = styled.img`
@@ -38,9 +38,9 @@ const RemoveButton = styled.button`
   vertical-align: middle;
 `
 
-function Track({ track, handleAdd, removeSeed }) {
+function Track({ track, handleAdd, removeSeed, isPlaylist }) {
   return (
-    <Container removeSeed={removeSeed} className='track' onClick={handleAdd} removeSeed={removeSeed}>
+    <Container removeSeed={removeSeed} className='track' onClick={handleAdd} removeSeed={removeSeed} isPlaylist={isPlaylist}>
       <ImageContainer src={track.images[2] ? track.images[2].url : null} alt='image' height='50' width='50' />
       <Info>
         <Name>

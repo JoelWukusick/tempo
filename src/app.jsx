@@ -6,6 +6,7 @@ import SeedOptions from './seedOptions.jsx';
 import SeedSelections from './seedSelections.jsx';
 import CreatePlaylist from './createPlaylist.jsx';
 import Playlist from './playlist.jsx';
+import SavePlaylist from './savePlaylist.jsx';
 import styled from 'styled-components';
 const queryString = require('query-string');
 const axios = require('axios');
@@ -27,10 +28,6 @@ function App() {
   const [seedStack, setSeedStack] = useState([]);
   const [playlist, setPlaylist] = useState([]);
 
-  function validateForm() {
-    return q.length > 0;
-  }
-
   function handleSubmit(event) {
     let stringifiedQuery = queryString.stringify({ type, q });
     axios({
@@ -42,6 +39,17 @@ function App() {
         setResults(results.data)
       });
     event.preventDefault();
+  }
+
+  function handleSave(e, name) {    
+    e.preventDefault();
+    let stringifiedQuery = queryString.stringify({ name });
+    console.log('save', stringifiedQuery);
+    axios({
+      method: 'get',
+      url: `/login`,
+      json: true
+    })
   }
 
   function handleAdd(item) {
@@ -102,13 +110,14 @@ function App() {
     <Container>
       <Column>
         <SeedOptions handleSlide={handleSlide} createPlaylist={createPlaylist} />
-        <SearchForm handleSubmit={handleSubmit} validateForm={validateForm} setType={setType} setQ={setQ} type={type} q={q} />
+        <SearchForm handleSubmit={handleSubmit} setType={setType} setQ={setQ} type={type} q={q} />
         <SearchResults data={results} handleAdd={handleAdd} />
       </Column>
       <Column>
         <SeedSelections data={seedStack} removeSeed={removeSeed} />
         <CreatePlaylist createPlaylist={createPlaylist} />
         <Playlist data={playlist} />
+        <SavePlaylist handleSave={handleSave} />
       </Column>
     </Container>
   )

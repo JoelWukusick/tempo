@@ -14,7 +14,6 @@ function SearchForm({ handleSubmit, validateForm, setType, setQ, type, q }) {
     return q.length > 0;
   }
 
-
   return (
     <SearchContainer className="Login">
       <form onSubmit={handleSubmit}>
