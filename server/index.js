@@ -42,12 +42,23 @@ app.get('/callback', function (req, res) {
   } else {
     res.clearCookie(stateKey);
     client.getUserAuth(code)
-      .then((res) => {
-        let access_token = res.access_token;
-        let refresh_token = res.refresh_token;
-        console.log(access_token, refresh_token)
-      }
-      );
+      .then((result) => {
+        let access_token = result.access_token;
+        let refresh_token = result.refresh_token;
+        res.redirect('/#' +
+          querystring.stringify({
+            access_token,
+            refresh_token
+          }));
+      })
+      .catch((err) => {
+        console.log(err)
+        res.redirect('/#' +
+          querystring.stringify({
+            error: 'invalid_token'
+          })
+        )
+      })
     // }
   }
 });

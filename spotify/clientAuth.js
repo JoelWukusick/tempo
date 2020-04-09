@@ -38,7 +38,6 @@ module.exports = {
   },
   userAuthAsync: async (code) => {
     userAuthOptions.form.code = code;
-    console.log('!!!!!AUTH OPTIONS' , userAuthOptions)
     return rp.post(userAuthOptions)
       .then(body => {
         return body;
