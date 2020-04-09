@@ -6,7 +6,7 @@ const Container = styled.div`
   padding: 10px;
 `
 
-function savePlaylist({ handleSave }) {
+function savePlaylist({ handleSave, signedIn }) {
 
   const [name, setName] = useState("");
 
@@ -14,25 +14,29 @@ function savePlaylist({ handleSave }) {
     return name.length > 0;
   }
 
-  return (
-    <Container className="Login">
-      {/* <form onSubmit={(e) => handleSave(e, name)}>
-        <label>Save Playlist</label>
-        <input
-          id='name'
-          autoFocus
-          type='text'
-          value={name}
-          onChange={e => setName(e.target.value)}
-        />
-        <button disabled={!validateForm()} type="submit">
-          Save Playlist
-          </button>
-      </form> */}
-      <a href="/login" class="btn btn-primary">Log in with Spotify</a>
-
-    </Container>
-  );
+  if (signedIn){
+    return (
+      <Container className="Login">
+        <form onSubmit={(e) => handleSave(e, name)}>
+          <label>Save Playlist</label>
+          <input
+            id='name'
+            autoFocus
+            type='text'
+            value={name}
+            onChange={e => setName(e.target.value)}
+          />
+          <button disabled={!validateForm()} type="submit">
+            Save Playlist
+            </button>
+        </form>
+        {/* <a href="/login" class="btn btn-primary">Log in with Spotify</a> */}
+  
+      </Container>
+    );
+  } else {
+    return null;
+  };
 }
 
 export default savePlaylist;

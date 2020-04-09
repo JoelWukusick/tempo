@@ -8,6 +8,7 @@ import CreatePlaylist from './createPlaylist.jsx';
 import Playlist from './playlist.jsx';
 import SavePlaylist from './savePlaylist.jsx';
 import styled from 'styled-components';
+import Login from './login.jsx';
 const queryString = require('query-string');
 const axios = require('axios');
 
@@ -43,13 +44,17 @@ function App() {
 
   function handleSave(e, name) {    
     e.preventDefault();
-    let stringifiedQuery = queryString.stringify({ name });
-    console.log('save', stringifiedQuery);
-    axios({
-      method: 'get',
-      url: `/login`,
-      json: true
-    })
+    // let stringifiedQuery = queryString.stringify({ name });
+    // axios({
+    //   method: 'get',
+    //   url: `/login`,
+    //   json: true
+    // })
+    // .then(() => {
+    //   axios({
+
+    //   })
+    // })
   }
 
   function handleAdd(item) {
@@ -106,6 +111,10 @@ function App() {
     // delete seed[item.type][]
   }
 
+  let path = window.location.pathname;
+  if(path === '/new/'){
+    return <Login/>
+  } else
   return (
     <Container>
       <Column>
@@ -117,7 +126,7 @@ function App() {
         <SeedSelections data={seedStack} removeSeed={removeSeed} />
         <CreatePlaylist createPlaylist={createPlaylist} />
         <Playlist data={playlist} />
-        <SavePlaylist handleSave={handleSave} />
+        <SavePlaylist handleSave={handleSave} signedIn={path === '/signed_in/'}/>
       </Column>
     </Container>
   )

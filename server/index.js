@@ -2,8 +2,8 @@ const express = require('express');
 var querystring = require('querystring');
 const client = require('../server/spotify.js');
 const { client_id, redirect_uri } = require('../spotify/config.js');
-var cors = require('cors');
-const cookieParser = require('cookie-parser');
+// var cors = require('cors');
+// const cookieParser = require('cookie-parser');
 
 const port = 3000;
 const cache = {};
@@ -11,11 +11,15 @@ const stateKey = 'spotify_auth_state';
 
 var app = express();
 
-app.use(express.static('dist'))
-  .use(cors())
-  .use(cookieParser());
 
-app.get('/login', cors(), function (req, res) {
+app.use('/:user', express.static('dist'));
+
+app.get('/', (req, res) => {
+  res.redirect('/new');
+});
+
+app.get('/new/login', function (req, res) {
+  console.log('login')
   let state = client.generateRandomString(16);
   res.cookie(stateKey, state);
   let scope = 'playlist-modify-public';
@@ -29,7 +33,7 @@ app.get('/login', cors(), function (req, res) {
     }));
 });
 
-app.get('/callback', function (req, res) {
+app.get('/signed_in', function (req, res) {
   var code = req.query.code || null;
   var state = req.query.state || null;
   var storedState = req.cookies ? req.cookies[stateKey] : null;
