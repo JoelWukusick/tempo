@@ -10,8 +10,8 @@ function Login( ) {
 
   return (
     <Container className="Login">
-      <a href='/new/login'>Log in with Spotify</a>
-      <a href='/demo' >Use without save option</a>
+      <a href='/login'>Log in with Spotify</a>
+      <a href='/user/demo' >Use without save option</a>
     </Container>
   );
 }

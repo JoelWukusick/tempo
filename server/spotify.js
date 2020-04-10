@@ -147,6 +147,14 @@ module.exports = {
     let url = `https://api.spotify.com/v1/search?${paramsString}`;
     return getSpotify(url);
   },
+  getUser: async (access_token) => {
+    let options = {
+      url: 'https://api.spotify.com/v1/me',
+      headers: { 'Authorization': 'Bearer ' + access_token },
+      json: true
+    };
+    return rp(options);
+  },
   getUserAuth: async (code) => {
     return getAuth(code);
   },

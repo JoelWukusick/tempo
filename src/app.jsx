@@ -112,7 +112,7 @@ function App() {
   }
 
   let path = window.location.pathname;
-  if(path === '/new/'){
+  if(path === '/user/new/'){
     return <Login/>
   } else
   return (
@@ -126,7 +126,7 @@ function App() {
         <SeedSelections data={seedStack} removeSeed={removeSeed} />
         <CreatePlaylist createPlaylist={createPlaylist} />
         <Playlist data={playlist} />
-        <SavePlaylist handleSave={handleSave} signedIn={path === '/signed_in/'}/>
+        <SavePlaylist handleSave={handleSave} signedIn={path.split('/')[1] === 'user'}/>
       </Column>
     </Container>
   )
