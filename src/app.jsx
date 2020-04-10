@@ -42,19 +42,38 @@ function App() {
     event.preventDefault();
   }
 
-  function handleSave(e, name) {    
+  function handleSave(e, name) {
+    let hashParams = queryString.parse(window.location.hash);
+    let access_token = hashParams.access_token;
+    let user_id = hashParams.id;
+    let headers = {
+      'Authorization': `Bearer ${access_token}`,
+      'Content-Type': 'application/json'
+    };
     e.preventDefault();
-    // let stringifiedQuery = queryString.stringify({ name });
-    // axios({
-    //   method: 'get',
-    //   url: `/login`,
-    //   json: true
-    // })
-    // .then(() => {
-    //   axios({
+    axios({
+      method: 'post',
+      url: `https://api.spotify.com/v1/users/${user_id}/playlists`,
+      headers,
+      data: {
+        name
+      },
+      json: true
+    })
+      .then((res) => {
+        let uris = playlist.map(track => `spotify:track:${track.id}`)
+        axios({
+          method: 'post',
+          url: `https://api.spotify.com/v1/users/${user_id}/playlists/${res.data.id}/tracks`,
+          headers,
+          data: {
+            uris
+          },
+          json: true
+        })
+      })
 
-    //   })
-    // })
+    // ?access_token=BQA4iu8s4SACDmXrgXK51flUue1jV_4HmVdToyZ_3V3JvKBBCUbN7W66Z4aXNAhFQTZWA9EderyPzTWCr-eApD97dYlt7FxK8LgfvhKpw0I00MSE3L7NFdwU64N51RaxaDVdz1GB-vIgbLM2XBtU42C0--edtPYVD-V3IRVk-OI3SSFa&refresh_token=AQCd4V1BzwG4qWz3qGT99Plgp56uc4oRsspZB4rVYSLcm_JFXoG80Q15ErceYf2jxwBiPGtTloxoSw5fue0E3DBR05mAQYwyKOozdZdFBSKlSJVsEf5vFNOGxD2nRpqAmZA&id=jwukusick
   }
 
   function handleAdd(item) {
@@ -112,24 +131,24 @@ function App() {
   }
 
   let path = window.location.pathname;
-  if(path === '/user/new/'){
-    return <Login/>
+  if (path === '/user/new/') {
+    return <Login />
   } else
-  return (
-    <Container>
-      <Column>
-        <SeedOptions handleSlide={handleSlide} createPlaylist={createPlaylist} />
-        <SearchForm handleSubmit={handleSubmit} setType={setType} setQ={setQ} type={type} q={q} />
-        <SearchResults data={results} handleAdd={handleAdd} />
-      </Column>
-      <Column>
-        <SeedSelections data={seedStack} removeSeed={removeSeed} />
-        <CreatePlaylist createPlaylist={createPlaylist} />
-        <Playlist data={playlist} />
-        <SavePlaylist handleSave={handleSave} signedIn={path.split('/')[1] === 'user'}/>
-      </Column>
-    </Container>
-  )
+    return (
+      <Container>
+        <Column>
+          <SeedOptions handleSlide={handleSlide} createPlaylist={createPlaylist} />
+          <SearchForm handleSubmit={handleSubmit} setType={setType} setQ={setQ} type={type} q={q} />
+          <SearchResults data={results} handleAdd={handleAdd} />
+        </Column>
+        <Column>
+          <SeedSelections data={seedStack} removeSeed={removeSeed} />
+          <CreatePlaylist createPlaylist={createPlaylist} />
+          <SavePlaylist handleSave={handleSave} signedIn={path.split('/')[1] === 'user'} />
+          <Playlist data={playlist} />
+        </Column>
+      </Container>
+    )
 }
 
 ReactDOM.render(<App />, document.getElementById('App'));

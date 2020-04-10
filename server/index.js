@@ -45,19 +45,6 @@ app.get('/callback', function (req, res) {
         error: 'state_mismatch callback'
       }));
   } else {
-
-    //       var options = {
-    //         url: 'https://api.spotify.com/v1/me',
-    //         headers: { 'Authorization': 'Bearer ' + access_token },
-    //         json: true
-    //       };
-
-    //       // use the access token to access the Spotify Web API
-    //       request.get(options, function(error, response, body) {
-    //         console.log(body);
-    //       });
-
-
     res.clearCookie(stateKey);
     client.getUserAuth(code)
       .then((result) => {
