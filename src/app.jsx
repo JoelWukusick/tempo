@@ -144,7 +144,7 @@ function App() {
         <Column>
           <SeedSelections data={seedStack} removeSeed={removeSeed} />
           <CreatePlaylist createPlaylist={createPlaylist} />
-          <SavePlaylist handleSave={handleSave} signedIn={path.split('/')[1] === 'user'} />
+          <SavePlaylist handleSave={handleSave} signedIn={path.split('/')[2] !== 'demo'} />
           <Playlist data={playlist} />
         </Column>
       </Container>
