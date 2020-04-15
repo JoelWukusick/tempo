@@ -47,25 +47,25 @@ const RemoveButton = styled.button`
   vertical-align: middle;
 `
 
-function Track({ track, handleAdd, removeSeed, isPlaylist }) {
+function Item({ item, handleAdd, removeSeed, isPlaylist }) {
   return (
-    <Container removeSeed={removeSeed} className='track' onClick={handleAdd} removeSeed={removeSeed} isPlaylist={isPlaylist}>
-      <ImageContainer src={track.images[2] ? track.images[2].url : null} alt='image' height='50' width='50' />
+    <Container removeSeed={removeSeed} className='item' onClick={handleAdd} removeSeed={removeSeed} isPlaylist={isPlaylist}>
+      <ImageContainer src={item.images && item.images[2] ? item.images[2].url : 'https://tempoimages.s3.us-east-2.amazonaws.com/blank.jpg'} alt='image' height='50' width='50' />
       <Info>
         <Name>
-          {track.name}
+          {item.name}
         </Name>
         <Artists>
-          {track.artists.map((artist, i, artists) => {
+          {item.artists ? item.artists.map((artist, i, artists) => {
             return (
               <Artist>{i === artists.length - 1 ? `${artist.name}` : `${artist.name}, `}</Artist>
             )
-          })}
+          }) : null}
         </Artists>
       </Info>
-      {removeSeed ? <RemoveButton onClick={() => removeSeed(track)}>remove</RemoveButton> : null}
+      {removeSeed ? <RemoveButton onClick={() => removeSeed(item)}>remove</RemoveButton> : null}
     </Container>
   );
 }
 
-export default Track;
+export default Item;

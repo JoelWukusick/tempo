@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import Slider from './slider.jsx';
 
 const Container = styled.div`
-  padding: 10px;
-  margin-right: 20px;
-  border-radius: 5px;
+  padding-right: 20px;
+  padding-top: 20px;
+  min-width: 600px;
 `
 
 
@@ -39,7 +39,7 @@ function SeedOptions({ handleSlide }) {
         id='tempo'
         min={60}
         max={180}
-        defaultValue={[135, 143]}
+        defaultValue={[133, 143]}
         pushable={5}
         marks={tempoMarks}
         handleSlide={handleSlide} />

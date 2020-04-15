@@ -4,7 +4,8 @@ import Results from './searchResults.jsx';
 
 
 const SearchContainer = styled.div`
-  padding: 10px;
+  padding: 20px;
+  min-width: 450px;
 `
 
 function SearchForm({ handleSubmit, validateForm, setType, setQ, type, q }) {

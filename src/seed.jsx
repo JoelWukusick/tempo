@@ -11,10 +11,11 @@ const Container = styled.div`
   display: grid;
   grid-template-columns: 50% 50%;
   color: #fff0ea;
-  background-color: #093c3cae;
+  background-color: #051F1499;
   font-family: 'Montserrat', sans-serif;
   width: 100%;
   height: 350px;
+  min-width: 1050px;
 `
 
 const Column = styled.div`

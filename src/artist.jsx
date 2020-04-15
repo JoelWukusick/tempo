@@ -11,15 +11,19 @@ const ImageContainer = styled.img`
   vertical-align: middle;
 `
 
-const Info = styled.div`
+const Info = styled.span`
   display: inline-block;
   margin: auto;
   padding-left: 5px;
+  width: 70%;
+  overflow: hidden;
 `
 
 const Name = styled.p`
   margin: 5px;
   font-weight: 600;
+  overflow: hidden;
+  white-space: nowrap;
 `
 
 const RemoveButton = styled.button`

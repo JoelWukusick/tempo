@@ -8,9 +8,11 @@ const queryString = require('query-string');
 const axios = require('axios');
 
 const Container = styled.div`
-  min-width: 1024px;
+  min-width: 960px;
   color: #fff0ea;
   font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  padding: 0;
 `
 
 function App() {

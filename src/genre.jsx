@@ -21,6 +21,8 @@ const Info = styled.div`
 const Name = styled.p`
   margin: 5px;
   font-weight: 600;
+  overflow: hidden;
+  white-space: nowrap;
 `
 
 const RemoveButton = styled.button`
