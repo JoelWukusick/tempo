@@ -1,24 +1,16 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
-import SearchForm from './searchForm.jsx';
-import SearchResults from './searchResults.jsx';
-import SeedOptions from './seedOptions.jsx';
-import SeedSelections from './seedSelections.jsx';
-import CreatePlaylist from './createPlaylist.jsx';
-import Playlist from './playlist.jsx';
-import SavePlaylist from './savePlaylist.jsx';
+import Seed from './seed.jsx';
 import styled from 'styled-components';
 import Login from './login.jsx';
+import Results from './results.jsx';
 const queryString = require('query-string');
 const axios = require('axios');
 
 const Container = styled.div`
-  display: grid;
-  grid-template-columns: 50% 50%;
-`
-
-const Column = styled.div`
-
+  min-width: 1024px;
+  color: #fff0ea;
+  font-family: 'Montserrat', sans-serif;
 `
 
 function App() {
@@ -136,18 +128,22 @@ function App() {
   } else
     return (
       <Container>
-        <Column>
-          <SeedOptions handleSlide={handleSlide} createPlaylist={createPlaylist} />
-          <SearchForm handleSubmit={handleSubmit} setType={setType} setQ={setQ} type={type} q={q} />
-          <SearchResults data={results} handleAdd={handleAdd} />
-        </Column>
-        <Column>
-          <SeedSelections data={seedStack} removeSeed={removeSeed} />
-          <CreatePlaylist createPlaylist={createPlaylist} />
-          <SavePlaylist handleSave={handleSave} signedIn={path.split('/')[2] !== 'demo'} />
-          <Playlist data={playlist} />
-        </Column>
+        <Results
+        handleSubmit={handleSubmit} 
+        setType={setType} setQ={setQ} 
+        type={type} q={q}
+        results={results} 
+        handleAdd={handleAdd}
+        handleSave={handleSave} 
+        signedIn={path.split('/')[2] !== 'demo'}
+        playlist={playlist} />
+        <Seed
+          handleSlide={handleSlide}
+          createPlaylist={createPlaylist}
+          data={seedStack}
+          removeSeed={removeSeed} />
       </Container>
+
     )
 }
 

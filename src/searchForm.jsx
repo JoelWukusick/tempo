@@ -17,7 +17,6 @@ function SearchForm({ handleSubmit, validateForm, setType, setQ, type, q }) {
   return (
     <SearchContainer className="Login">
       <form onSubmit={handleSubmit}>
-        <label>{'Add Seed '}</label>
         <select id='type' name='type' value={type} onChange={e => setType(e.target.value)}>
           <option value='artist'>Artist</option>
           <option value='genre'>Genre</option>

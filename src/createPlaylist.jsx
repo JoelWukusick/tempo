@@ -3,7 +3,9 @@ import styled from 'styled-components';
 
 
 const Container = styled.div`
-  padding: 5px;
+  padding-bottom: 5px;
+  display: block;
+  text-align: center;
 `
 
 const CreateButton = styled.button`

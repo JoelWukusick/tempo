@@ -18,7 +18,6 @@ function savePlaylist({ handleSave, signedIn }) {
     return (
       <Container className="Login">
         <form onSubmit={(e) => handleSave(e, name)}>
-          <label>Save Playlist</label>
           <input
             id='name'
             autoFocus

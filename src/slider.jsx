@@ -4,7 +4,8 @@ import { Range } from 'rc-slider';
 import 'rc-slider/assets/index.css';
 
 const Container = styled.div`
-  margin: 0px 0px 40px;
+  margin: 20px 0px;
+  padding:  10px 20px;
 `
 
 
@@ -16,7 +17,7 @@ const Title = styled.div`
 `
 
 const SliderContainer = styled.div`
-  width: 80%;
+  width: 75%;
   float: right;
 `
 

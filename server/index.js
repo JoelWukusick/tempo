@@ -3,6 +3,8 @@ var querystring = require('querystring');
 const client = require('../server/spotify.js');
 const { client_id, redirect_uri } = require('../spotify/config.js');
 const cookieParser = require('cookie-parser');
+var favicon = require('serve-favicon');
+
 // var cors = require('cors');
 
 const port = 3000;
@@ -13,7 +15,8 @@ var app = express();
 
 
 app.use('/user/:user', express.static('dist'))
-  .use(cookieParser());
+  .use(cookieParser())
+  .use(favicon('resources/favicon.ico'));
 
 app.get('/', (req, res) => {
   res.redirect('/user/new');

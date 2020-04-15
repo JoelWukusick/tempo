@@ -4,7 +4,8 @@ import Slider from './slider.jsx';
 
 const Container = styled.div`
   padding: 10px;
-  margin-right: 50px;
+  margin-right: 20px;
+  border-radius: 5px;
 `
 
 
@@ -34,7 +35,7 @@ function SeedOptions({ handleSlide }) {
   return (
     <Container>
       <Slider
-        title='Tempo'
+        title='TEMPO'
         id='tempo'
         min={60}
         max={180}
@@ -43,18 +44,8 @@ function SeedOptions({ handleSlide }) {
         marks={tempoMarks}
         handleSlide={handleSlide} />
       <Slider
-        title='Danceability'
+        title='DANCEABILITY'
         id='danceability'
-        min={0}
-        max={1}
-        defaultValue={[0.5, 1]}
-        step={.01}
-        pushable={.1}
-        marks={marks}
-        handleSlide={handleSlide} />
-      <Slider
-        title='Energy'
-        id='energy'
         min={0}
         max={1}
         defaultValue={[0.4, 1]}
@@ -63,7 +54,17 @@ function SeedOptions({ handleSlide }) {
         marks={marks}
         handleSlide={handleSlide} />
       <Slider
-        title='Cheerfulness'
+        title='ENERGY'
+        id='energy'
+        min={0}
+        max={1}
+        defaultValue={[0.3, 1]}
+        step={.01}
+        pushable={.1}
+        marks={marks}
+        handleSlide={handleSlide} />
+      <Slider
+        title='CHEERFULNESS'
         id='valence'
         min={0}
         max={1}
