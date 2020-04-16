@@ -13,7 +13,6 @@ const SearchBar = styled.div`
   height: 50px;
   width: 100%;
   min-width: 900px;
-  sizing: border-box;
 `
 
 const Container = styled.div`
@@ -21,14 +20,14 @@ const Container = styled.div`
   grid-template-columns: 50% 50%;
   position: absolute;
   top: 110px;
-  bottom: 340px;
+  bottom: 340px; 
   width: 100%;
-  color: #fff0ea;
   font-family: 'Montserrat', sans-serif;
   color: black;
   box-sizing: border-box;
   margin: 0px;
   min-width: 900px;
+  color: #051d19;
 `
 
 const Column = styled.div`
