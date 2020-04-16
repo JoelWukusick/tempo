@@ -61,7 +61,7 @@ const AddButton = styled.div`
 function Item({ item, handleAdd, removeSeed, isPlaylist }) {
   return (
     <Container removeSeed={removeSeed} className='item' onClick={handleAdd} removeSeed={removeSeed} isPlaylist={isPlaylist}>
-      <ImageContainer src={item.images && item.images[2] ? item.images[2].url : 'https://tempoimages.s3.us-east-2.amazonaws.com/blank.jpg'} alt='image' height='50' width='50' />
+      <ImageContainer src={item.images && item.images[2] ? item.images[2].url : 'https://tempoimages.s3.us-east-2.amazonaws.com/transparent.png'} alt='image' height='50' width='50' />
       <Info>
         <Name>
           {item.name}
