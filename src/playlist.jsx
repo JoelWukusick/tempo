@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Track from './track.jsx';
+import Item from './item.jsx';
 
 const Container = styled.div`
 `
@@ -10,7 +10,7 @@ function Playlist({ data }) {
     <Container>
         {data.map((item, i) => {
           return (
-            <Track track={item} handleAdd={() => { }} isPlaylist={true} />
+            <Item item={item} handleAdd={() => { }} isPlaylist={true} />
           )
         })}
     </Container>

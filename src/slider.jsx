@@ -1,7 +1,7 @@
 import React from "react";
 import styled from 'styled-components';
 import { Range } from 'rc-slider';
-import 'rc-slider/assets/index.css';
+import './styles/slider.css';
 
 const Container = styled.div`
   margin: 20px 0px;

@@ -5,12 +5,12 @@ import SearchResults from './searchResults.jsx'
 import Playlist from './playlist.jsx';
 import SavePlaylist from './savePlaylist.jsx';
 
-const Header = styled.div`
+const SearchBar = styled.div`
   display: grid;
   grid-template-columns: 50% 50%;
   position: absolute;
-  top: 0;
-  height: 70px;
+  top: 60px;
+  height: 50px;
   width: 100%;
   min-width: 900px;
   sizing: border-box;
@@ -20,8 +20,8 @@ const Container = styled.div`
   display: grid;
   grid-template-columns: 50% 50%;
   position: absolute;
-  top: 70px;
-  bottom: 350px;
+  top: 110px;
+  bottom: 340px;
   width: 100%;
   color: #fff0ea;
   font-family: 'Montserrat', sans-serif;
@@ -43,10 +43,10 @@ const Column = styled.div`
 function Results({ handleSubmit, setType, setQ, type, q, results, handleAdd, handleSave, signedIn, playlist }) {
   return (
     <div>
-      <Header>
+      <SearchBar>
         <SearchForm handleSubmit={handleSubmit} setType={setType} setQ={setQ} type={type} q={q} />
         <SavePlaylist handleSave={handleSave} signedIn={signedIn} />
-      </Header>
+      </SearchBar>
       <Container>
         <Column>
           <SearchResults data={results} handleAdd={handleAdd} />

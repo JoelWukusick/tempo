@@ -4,6 +4,7 @@ import Seed from './seed.jsx';
 import styled from 'styled-components';
 import Login from './login.jsx';
 import Results from './results.jsx';
+import Header from './header.jsx';
 const queryString = require('query-string');
 const axios = require('axios');
 
@@ -45,6 +46,7 @@ function App() {
       'Content-Type': 'application/json'
     };
     e.preventDefault();
+    if (playlist.length > 0) {
     axios({
       method: 'post',
       url: `https://api.spotify.com/v1/users/${user_id}/playlists`,
@@ -55,19 +57,27 @@ function App() {
       json: true
     })
       .then((res) => {
-        let uris = playlist.map(track => `spotify:track:${track.id}`)
-        axios({
-          method: 'post',
-          url: `https://api.spotify.com/v1/users/${user_id}/playlists/${res.data.id}/tracks`,
-          headers,
-          data: {
-            uris
-          },
-          json: true
+          let uris = playlist.map(track => `spotify:track:${track.id}`)
+          axios({
+            method: 'post',
+            url: `https://api.spotify.com/v1/users/${user_id}/playlists/${res.data.id}/tracks`,
+            headers,
+            data: {
+              uris
+            },
+            json: true
+          })
         })
-      })
-
-    // ?access_token=BQA4iu8s4SACDmXrgXK51flUue1jV_4HmVdToyZ_3V3JvKBBCUbN7W66Z4aXNAhFQTZWA9EderyPzTWCr-eApD97dYlt7FxK8LgfvhKpw0I00MSE3L7NFdwU64N51RaxaDVdz1GB-vIgbLM2XBtU42C0--edtPYVD-V3IRVk-OI3SSFa&refresh_token=AQCd4V1BzwG4qWz3qGT99Plgp56uc4oRsspZB4rVYSLcm_JFXoG80Q15ErceYf2jxwBiPGtTloxoSw5fue0E3DBR05mAQYwyKOozdZdFBSKlSJVsEf5vFNOGxD2nRpqAmZA&id=jwukusick
+        .then(res => {
+          setPlaylist([]);
+          alert(`'${name}' saved as a public playlist to your spotify account.`)
+        })
+        .catch(err => {
+          alert(`Unable to save playlist: ${err}`);
+        });
+        } else {
+          alert('There are no songs. Please create a playlist.')
+        }
   }
 
   function handleAdd(item) {
@@ -111,6 +121,9 @@ function App() {
     })
       .then(results => {
         setPlaylist(results.data)
+        if ( results.data.length === 0 ) {
+          alert('No results. Please widen your parameters or add more seeds.')
+        }
       });
   }
 
@@ -126,19 +139,25 @@ function App() {
 
   let path = window.location.pathname;
   if (path === '/user/new/') {
-    return <Login />
+    return (
+      <div>
+        <Header />
+        <Login />
+      </div>
+    )
   } else
     return (
       <Container>
+        <Header />
         <Results
-        handleSubmit={handleSubmit} 
-        setType={setType} setQ={setQ} 
-        type={type} q={q}
-        results={results} 
-        handleAdd={handleAdd}
-        handleSave={handleSave} 
-        signedIn={path.split('/')[2] !== 'demo'}
-        playlist={playlist} />
+          handleSubmit={handleSubmit}
+          setType={setType} setQ={setQ}
+          type={type} q={q}
+          results={results}
+          handleAdd={handleAdd}
+          handleSave={handleSave}
+          signedIn={path.split('/')[2] !== 'demo'}
+          playlist={playlist} />
         <Seed
           handleSlide={handleSlide}
           createPlaylist={createPlaylist}

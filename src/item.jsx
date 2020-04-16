@@ -14,9 +14,9 @@ const ImageContainer = styled.img`
 const Info = styled.span`
   display: inline-block;
   vertical-align: middle;
-  padding-left: 7px;
+  padding-left: 10px;
   padding-right: 10px;
-  width: 70%;
+  width: 80%;
   box-sizing: border-box;
   overflow: hidden;
 `
@@ -41,10 +41,21 @@ const Name = styled.p`
   white-space: nowrap;
 `
 
-const RemoveButton = styled.button`
+const RemoveButton = styled.div`
+  font-size: 18px;
   text-align: right;
   display: inline;
   vertical-align: middle;
+  cursor: pointer;
+`
+
+const AddButton = styled.div`
+  font-size: 18px;
+  text-align: right;
+  display: inline;
+  vertical-align: middle;
+  padding: 10px;
+  cursor: pointer;
 `
 
 function Item({ item, handleAdd, removeSeed, isPlaylist }) {
@@ -63,7 +74,8 @@ function Item({ item, handleAdd, removeSeed, isPlaylist }) {
           }) : null}
         </Artists>
       </Info>
-      {removeSeed ? <RemoveButton onClick={() => removeSeed(item)}>remove</RemoveButton> : null}
+      {removeSeed ? <RemoveButton onClick={() => removeSeed(item)}><i class="fas fa-trash-alt"></i></RemoveButton> : null}
+      {!removeSeed && !isPlaylist ? <AddButton onClick={() => removeSeed(item)}><i class="fas fa-plus"></i></AddButton> : null}
     </Container>
   );
 }

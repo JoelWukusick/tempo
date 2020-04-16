@@ -4,7 +4,7 @@ import Results from './searchResults.jsx';
 
 
 const SearchContainer = styled.div`
-  padding: 20px;
+  padding: 12px;
   min-width: 450px;
 `
 

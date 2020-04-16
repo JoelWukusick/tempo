@@ -53,7 +53,6 @@ const getSpotify = async (url) => {
     })
     .catch((err) => {
       if (err.statusCode === 401) {
-        console.log('resetting token')
         return getToken(true)
           .then((token) => {
             let options = {

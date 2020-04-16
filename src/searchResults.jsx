@@ -1,9 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Item from './item.jsx';
-import Track from './track.jsx';
-import Artist from './artist.jsx';
-import Genre from './genre.jsx';
+
 
 
 const Container = styled.div`

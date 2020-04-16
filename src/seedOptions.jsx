@@ -4,7 +4,7 @@ import Slider from './slider.jsx';
 
 const Container = styled.div`
   padding-right: 20px;
-  padding-top: 20px;
+  padding-top: 18px;
   min-width: 600px;
 `
 
