@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
   target: 'node',
-  entry: './src/app.jsx',
+  entry: './src/App.jsx',
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
@@ -19,7 +19,10 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env', '@babel/preset-react']
+            presets: ['@babel/preset-env', '@babel/preset-react'],
+            "plugins": [
+              "@babel/plugin-proposal-class-properties"
+            ]
           }
         }
       },

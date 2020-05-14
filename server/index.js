@@ -12,13 +12,13 @@ const stateKey = 'spotify_auth_state';
 var app = express();
 
 
-app.use('/user/:user', express.static('dist'))
+app.use('/', express.static('dist'))
   .use(cookieParser())
   .use(favicon('resources/favicon.ico'));
 
-app.get('/', (req, res) => {
-  res.redirect('/user/new');
-});
+// app.get('/', (req, res) => {
+//   res.redirect('/new');
+// });
 
 app.get('/login', function (req, res) {
   let state = client.generateRandomString(16);
@@ -38,7 +38,7 @@ app.get('/callback', function (req, res) {
   var code = req.query.code || null;
   var state = req.query.state || null;
   var storedState = req.cookies ? req.cookies[stateKey] : null;
-
+  console.log(state)
   if (state === null || state !== storedState) {
     res.redirect('/#' +
       querystring.stringify({
@@ -49,17 +49,21 @@ app.get('/callback', function (req, res) {
     client.getUserAuth(code)
       .then((result) => {
         let access_token = result.access_token;
+        res.cookie('access_token', result.access_token);
         let refresh_token = result.refresh_token;
+        res.cookie('refresh_token', result.refresh_token);
+
         return client.getUser(access_token)
           .then(result => {
             let id = result.id
             let query = querystring.stringify({ access_token, refresh_token, id })
-            res.redirect(`/user/${result.display_name}/#${query}`)
+            res.cookie('username', result.display_name);
+            res.redirect(`/`)
           })
       })
       .catch((err) => {
         console.log(err)
-        res.redirect('/user/demo/#' +
+        res.redirect('/?user=demo/#' +
           querystring.stringify({
             error: 'invalid_token'
           })
@@ -68,7 +72,7 @@ app.get('/callback', function (req, res) {
   }
 });
 
-app.get('/search', (req, res) => {
+app.get('/api/search', (req, res) => {
   let query = JSON.stringify(req.query);
   if (cache[query]) {
     res.send(cache[query])
@@ -101,7 +105,7 @@ app.get('/search', (req, res) => {
   }
 })
 
-app.get('/recommendations', (req, res) => {
+app.get('/api/recommendations', (req, res) => {
   let query = JSON.stringify(req.query);
   if (cache[query]) {
     res.send(cache[query])
