@@ -3,10 +3,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
-
   title: {
     fontWeight: '200',
-  },
+    padding: theme.spacing(1)
+  }
 }));
 
 export default function Header() {
@@ -14,11 +14,10 @@ export default function Header() {
 
   return (
     <AppBar position="static">
-      <Toolbar >
-        <Typography variant="h5" className={classes.title}>
-          TEMPO
-          </Typography>
-      </Toolbar>
+      <Typography variant="h5" className={classes.title}>
+        TEMPO
+      </Typography>
+
     </AppBar>
   )
 }
