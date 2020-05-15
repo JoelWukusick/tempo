@@ -1,26 +1,21 @@
 import React from 'react';
 import SearchForm from './SearchForm.jsx';
-import { Container, Grid, Button, TextField, Paper, BottomNavigation, BottomNavigationAction, Fab } from '@material-ui/core';
+import { List, Paper } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-
+import BottomNav from './BottomNav.jsx';
+import ListCard from './ListCard.jsx';
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(2),
-    marginLeft: 0,
-    height: '100%'
+    marginLeft: 0
+
   },
-  bottomNavigation: {
-    position: "fixed",
-    bottom: 0,
-    width: '100%'
+  fab: {
+    position: 'absolute',
+    bottom: theme.spacing(10),
+    right: theme.spacing(2),
   },
-  grid: {
-    flexGrow: 1,
-  },
-  action: {
-    width: '100px',
-  }
+
 }));
 
 export default function Search() {
@@ -29,12 +24,15 @@ export default function Search() {
   return (
     <>
       <SearchForm />
-      <Paper className={classes.paper} >paper</Paper>
-      <BottomNavigation className={classes.bottomNavigation}>
-        <Grid className={classes.grid} spacing={2}>
-        </Grid>
-        <Fab size='small' variant='extended'>Next</Fab>
-      </BottomNavigation>
+      <Paper className={classes.paper} >
+        <List>
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17].map(value => (
+            <ListCard />
+          ))}
+        </List>
+      </Paper>
+
+      <BottomNav />
     </>
   )
 }

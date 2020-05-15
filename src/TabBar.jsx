@@ -20,9 +20,9 @@ export default function TabBar() {
     <AppBar position="static" className={classes.tabBar}>
       <Tabs value={page} variant={'fullWidth'}>
 
-        <Tab label={<SearchIcon />} onClick={() => setPage('/search')} value={'/search'} component={Link} to={'/search'} />
-        <Tab label={<TuneIcon />} onClick={() => setPage('/controls')} value={'/controls'} component={Link} to={'/controls'} />
-        <Tab label={<QueueMusicIcon />} onClick={() => setPage('/playlists')} value={'/playlists'} component={Link} to={'/playlists'} />
+        <Tab label='search' icon={<SearchIcon />} onClick={() => setPage('/search')} value={'/search'} component={Link} to={'/search'} />
+        <Tab label='controls' icon={<TuneIcon />} onClick={() => setPage('/controls')} value={'/controls'} component={Link} to={'/controls'} />
+        <Tab label='playlists' icon={<QueueMusicIcon />} onClick={() => setPage('/playlists')} value={'/playlists'} component={Link} to={'/playlists'} />
       </Tabs>
     </AppBar>
   );

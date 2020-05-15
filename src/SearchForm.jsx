@@ -14,7 +14,7 @@ export default function SearchForm() {
 
   return (
     <Container spacing={3}>
-      <Grid className={classes.grid} container spacing={0} >
+      <Grid className={classes.grid} container spacing={3} >
         <Grid item >
           <Button size='small'>artist</Button>
         </Grid>
