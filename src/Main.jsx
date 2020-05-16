@@ -1,11 +1,11 @@
-import React, { useContext, setState } from 'react';
+import React, { useContext} from 'react';
 import UserContext from './UserContext.jsx';
 
 import Login from './Login.jsx';
 import TabBar from './TabBar.jsx';
 import Search from './Search.jsx';
 import Controls from './Controls.jsx';
-import Playlists from './Playlists.jsx';
+import Playlist from './Playlist.jsx';
 import { BrowserRouter, Route } from "react-router-dom";
 
 
@@ -17,9 +17,8 @@ function Main() {
         <BrowserRouter>
           <TabBar />
           <Route path='/' exact component={Search} />
-          <Route path='/search' component={Search} />
           <Route path='/controls' component={Controls} />
-          <Route path='/playlists' component={Playlists} />
+          <Route path='/playlists' component={Playlist} />
         </BrowserRouter>
       :
       <Login />

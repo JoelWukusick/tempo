@@ -1,20 +1,14 @@
 import React from 'react';
-import { Container, Grid, Button, TextField } from '@material-ui/core';
+import { Container, Grid, Box, Button, TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles((theme) => ({
-  grid: {
-    marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1),
-  }
-}));
 
 export default function SearchForm() {
-  const classes = useStyles();
 
   return (
-    <Container spacing={3}>
-      <Grid className={classes.grid} container spacing={3} >
+    <Container >
+      <Box m={1} />
+      <Grid container spacing={2} >
         <Grid item >
           <Button size='small'>artist</Button>
         </Grid>
@@ -25,6 +19,7 @@ export default function SearchForm() {
           <Button size='small'>track</Button>
         </Grid>
       </Grid>
+      <Box m={1} />
       <TextField noValidate autoComplete="off" fullWidth color='primary' id='search' label={`search`} variant="filled" />
     </Container >
   )
