@@ -12,7 +12,7 @@ export default function CustomControls() {
             </Typography>
           <Slider
             value={[10, 20]}
-            onChange={() => { }}
+            onChange={(e) => { console.log(e)}}
             valueLabelDisplay="auto"
             aria-labelledby="range-slider"
             getAriaValueText={() => { }}

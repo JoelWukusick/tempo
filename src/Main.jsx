@@ -1,29 +1,28 @@
 import React, { useContext} from 'react';
-import UserContext from './UserContext.jsx';
+import DataContext from './DataContext.jsx';
 
 import Login from './Login.jsx';
 import TabBar from './TabBar.jsx';
 import Search from './Search.jsx';
 import Controls from './Controls.jsx';
-import Playlist from './Playlist.jsx';
+import Playlists from './Playlist.jsx';
 import { BrowserRouter, Route } from "react-router-dom";
 
 
 function Main() {
-  const user = useContext(UserContext);
+  const data = useContext(DataContext);
 
   return (
-    user[0].username ?
+    data.username ?
         <BrowserRouter>
           <TabBar />
           <Route path='/' exact component={Search} />
           <Route path='/controls' component={Controls} />
-          <Route path='/playlists' component={Playlist} />
+          <Route path='/playlists' component={Playlists} />
         </BrowserRouter>
       :
       <Login />
   )
-
 }
 
 export default Main;

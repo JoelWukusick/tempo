@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     height: 'auto',
     padding: theme.spacing(2),
-    backgroundColor: theme.palette.text.disabled
+    backgroundColor: theme.palette.text.secondary
   },
 }));
 

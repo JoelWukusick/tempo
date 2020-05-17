@@ -1,19 +1,31 @@
-import React from 'react';
-import {ListItem, ListItemText, ListItemAvatar, Avatar} from '@material-ui/core';
+import React, {useContext} from 'react';
+import DataContext from './DataContext.jsx';
+import { ListItem, ListItemText, ListItemAvatar, Avatar } from '@material-ui/core';
 
 
-export default function AlignItemsList() {
+export default function AlignItemsList({ item }) {
+  const data = useContext(DataContext);
+
+  function handleAdd(item) {
+    data.seed[item.type].push(item);
+    data.seedStack.push(item);
+    if (data.seedStack.length > 5) {
+      let removeType = data.seedStack[0].type;
+      data.seed[removeType].shift();
+      data.seedStack.shift();
+    }
+    data.setSeed(Object.assign({}, data.seed));
+    data.setSeedStack(Array.from(data.seedStack))
+  }
 
   return (
-    <ListItem alignItems="flex-start">
+    <ListItem button alignItems="flex-start" onClick={() => handleAdd(item)}>
       <ListItemAvatar>
-        <Avatar alt="name" src="https://i.scdn.co/image/053191e73733c0c9d081859fdab2d9171e2905c3" />
+        <Avatar alt={item.name} src={item.images && item.images[2] ? item.images[2].url : null} />
       </ListItemAvatar>
       <ListItemText
-        primary="Test & Recognise - Flume Re-work"
-        secondary={
-          "Seekae, Flume"
-        }
+        primary={item.name}
+        secondary={item.artists ? item.artists.map((artist, i, artists) => i === artists.length - 1 ? `${artist.name}` : `${artist.name}, `) : null}
       />
     </ListItem>
   );

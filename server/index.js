@@ -16,13 +16,11 @@ app.use('/', express.static('dist'))
   .use(cookieParser())
   .use(favicon('resources/favicon.ico'));
 
-// app.get('/', (req, res) => {
-//   res.redirect('/new');
-// });
-
 app.get('/login', function (req, res) {
   let state = client.generateRandomString(16);
-  res.cookie(stateKey, state);
+  res.cookie(stateKey, state
+    // , { httpOnly: true }
+    );
   let scope = 'playlist-modify-public';
   res.redirect('https://accounts.spotify.com/authorize?' +
     querystring.stringify({
@@ -47,16 +45,19 @@ app.get('/callback', function (req, res) {
     res.clearCookie(stateKey);
     client.getUserAuth(code)
       .then((result) => {
-        let access_token = result.access_token;
-        res.cookie('access_token', result.access_token);
-        let refresh_token = result.refresh_token;
-        res.cookie('refresh_token', result.refresh_token);
+        res.cookie('access_token', result.access_token
+        // , { httpOnly: true }
+        );
+        res.cookie('refresh_token', result.refresh_token
+        // , { httpOnly: true }
+        );
 
-        return client.getUser(access_token)
+        return client.getUser(result.access_token)
           .then(result => {
             let id = result.id
-            let query = querystring.stringify({ access_token, refresh_token, id })
-            res.cookie('username', result.display_name);
+            res.cookie('username', result.display_name
+            // , { httpOnly: true }
+            );
             res.redirect(`/`)
           })
       })

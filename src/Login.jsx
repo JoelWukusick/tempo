@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import UserContext from './UserContext.jsx';
+import DataContext from './DataContext.jsx';
 import { Grid, Container, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 function Login() {
-  const [user, setUser] = useContext(UserContext);
+  const data = useContext(DataContext);
   const classes = useStyles();
   return (
     <Container className={classes.container}>
