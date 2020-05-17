@@ -43,7 +43,7 @@ export default function Search() {
       })
         .then(results => {
           setResults(results.data)
-          console.log(q)
+          console.log(results)
         });
     }
     event.preventDefault();
@@ -84,13 +84,17 @@ export default function Search() {
         </form>
       </Container >
       <Box m={2} />
-      <Paper  >
-        <List>
-          {results.map(item => (
-            <ListCard item={item} />
-          ))}
-        </List>
-      </Paper>
+      {results.length > 0 ?
+        <Paper  >
+          <List>
+            {results.map(item => (
+              <ListCard item={item} />
+            ))}
+          </List>
+        </Paper> :
+        null}
+
+
       <BottomNav >
         <Grid container justify='center' spacing={0} alignItems='center'>
           {data.seedStack.map(item => {
@@ -106,7 +110,7 @@ export default function Search() {
           }
           )}
           <Grid item xs={2} >
-            <Fab component={Link} to={'/controls'} disabled={!data.seedStack[0]} variant='extended' size='small'>next</Fab>
+            <Fab onClick={() => { data.setPage('/controls') }} component={Link} to={'/controls'} disabled={!data.seedStack[0]} variant='extended' size='small' color='primary'>next</Fab>
           </Grid>
         </Grid>
       </BottomNav>

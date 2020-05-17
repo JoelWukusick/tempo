@@ -134,7 +134,6 @@ function App() {
     let newSeedStack = seedStack.filter(obj => obj.name !== item.name);
     setSeed(newSeed);
     setSeedStack(newSeedStack);
-    // delete seed[item.type][]
   }
 
   let path = window.location.pathname;

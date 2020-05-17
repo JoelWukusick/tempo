@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import DataContext from './DataContext.jsx';
 import BottomNav from './BottomNav.jsx';
 import ListCard from './ListCard.jsx';
 import { makeStyles } from '@material-ui/core/styles';
@@ -13,6 +14,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Playlist() {
   const classes = useStyles();
+  const data = useContext(DataContext);
 
   return (
     <>
@@ -25,16 +27,18 @@ export default function Playlist() {
           </Grid>
         </Box>
       </Container>
-      <Paper  >
-        <List>
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17].map(value => (
-            <ListCard />
-          ))}
-        </List>
-      </Paper>
+      {data.playlist.length > 0 ?
+        <Paper  >
+          <List>
+            {data.playlist.map(item => (
+              <ListCard item={item} />
+            ))}
+          </List>
+        </Paper> :
+        null}
       <BottomNav>
         <Container className={classes.fabContainer}>
-          <Fab variant='extended' size='small'>save playlist</Fab>
+          <Fab variant='extended' size='small' color='primary' disabled={data.playlist.length === 0}>save playlist</Fab>
         </Container>
       </BottomNav>
     </>

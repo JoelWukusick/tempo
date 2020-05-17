@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import DataContext from './DataContext.jsx';
 import { Slider, Box, Container, Typography, Paper } from '@material-ui/core';
 
 
 export default function CustomControls() {
+  const data = useContext(DataContext);
+
   return (
     <Paper >
       <Container>
@@ -11,8 +14,10 @@ export default function CustomControls() {
             Tempo
             </Typography>
           <Slider
-            value={[10, 20]}
-            onChange={(e) => { console.log(e)}}
+            value={[data.seed.min_tempo, data.seed.max_tempo]}
+            min={60}
+            max={180}
+            onChange={(e, value) => { console.log(value) }}
             valueLabelDisplay="auto"
             aria-labelledby="range-slider"
             getAriaValueText={() => { }}
