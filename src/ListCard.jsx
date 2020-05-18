@@ -4,18 +4,18 @@ import { ListItem, ListItemText, ListItemAvatar, Avatar } from '@material-ui/cor
 
 
 export default function AlignItemsList({ item, clickable }) {
-  const data = useContext(DataContext);
+  const {seed, setSeed, seedStack, setSeedStack} = useContext(DataContext);
 
   function handleAdd(item) {
-    data.seed[item.type].push(item);
-    data.seedStack.push(item);
-    if (data.seedStack.length > 5) {
-      let removeType = data.seedStack[0].type;
-      data.seed[removeType].shift();
-      data.seedStack.shift();
+    seed[item.type].push(item);
+    seedStack.push(item);
+    if (seedStack.length > 5) {
+      let removeType = seedStack[0].type;
+      seed[removeType].shift();
+      seedStack.shift();
     }
-    data.setSeed(Object.assign({}, data.seed));
-    data.setSeedStack(Array.from(data.seedStack))
+    setSeed(Object.assign({}, seed));
+    setSeedStack(Array.from(seedStack))
   }
 
   return (
