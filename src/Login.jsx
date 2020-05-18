@@ -1,11 +1,17 @@
 import React, { useContext } from 'react';
 import DataContext from './DataContext.jsx';
-import { Grid, Container, Button } from '@material-ui/core';
+import { Grid, Container, Fab, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
-  container: {
-
+  button: {
+    width: '100%',
+    textAlign: 'center',
+  },
+  whiteButton: {
+    width: '100%',
+    textAlign: 'center',
+    color: theme.palette.primary.main
   },
   grid: {
     paddingTop: theme.spacing(8),
@@ -14,18 +20,20 @@ const useStyles = makeStyles(theme => ({
 }))
 
 function Login() {
-  const data = useContext(DataContext);
+  const { setUsername } = useContext(DataContext);
   const classes = useStyles();
   return (
-    <Container className={classes.container}>
-      <Grid className={classes.grid} container spacing={8}>
-        <Grid item>
-          <Button href='/login'>Log in with Spotify</Button>
+    <Container>
+      <Box py={18} px={4}>
+        <Grid className={classes.grid} container justify='center' spacing={3}  >
+          <Grid item xs={12} sm={8} md={4} lg={3} xl={2}>
+            <Fab className={classes.button} color='primary' href='/login' variant='extended'>Log in with Spotify</Fab>
+          </Grid>
+          <Grid item xs={12} sm={8} md={4} lg={3} xl={2}>
+            <Fab className={classes.whiteButton} color='inherit' onClick={() => { setUsername('demo') }} variant='extended' >Continue without save option</Fab>
+          </Grid>
         </Grid>
-        <Grid item>
-          <Button onClick={() => { setUser({ username: 'demo', access_token: null, refresh_token: null }) }}>Use without save option</Button>
-        </Grid>
-      </Grid>
+      </Box>
     </Container>
   );
 }

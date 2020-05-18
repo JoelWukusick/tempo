@@ -6,6 +6,7 @@ import { Slider, Box, Container, Typography, Paper } from '@material-ui/core';
 export default function CustomControls() {
   const data = useContext(DataContext);
   const controls = [{
+    label: 'Tempo',
     name: 'tempo',
     range: [60, 180],
     marks: [60, 80, 100, 120, 140, 160, 180],
@@ -13,6 +14,7 @@ export default function CustomControls() {
     scale: 1
   },
   {
+    label: 'Danceability',
     name: 'danceability',
     range: [0, 1],
     marks: [0, 1],
@@ -20,6 +22,7 @@ export default function CustomControls() {
     scale: 10
   },
   {
+    label: 'Energy',
     name: 'energy',
     range: [0, 1],
     marks: [0, 1],
@@ -27,6 +30,7 @@ export default function CustomControls() {
     scale: 10
   },
   {
+    label: 'Valence',
     name: 'valence',
     range: [0, 1],
     marks: [0, 1],
@@ -37,27 +41,12 @@ export default function CustomControls() {
   return (
     <Paper >
       <Container>
-        <Box py={4}>
-          {/* <Typography id="range-slider" >
-            Tempo
-            </Typography>
-          <Slider
-            value={[data.seed.min_tempo, data.seed.max_tempo]}
-            min={60}
-            max={180}
-            marks={[{ value: 60, label: 80 }, { value: 180, label: 180 }]}
-            step={1}
-            onChange={(e, value) => { console.log(value) }}
-            valueLabelDisplay="auto"
-            aria-labelledby="range-slider"
-            getAriaValueText={() => { }}
-          /> */}
-
+        <Box py={4} px={1}>
           {controls.map(control => {
             return (
               <>
                 <Typography id={control.name}>
-                  {control.name}
+                  {control.label}
                 </Typography>
                 <Slider
                   id={control.name}
@@ -69,51 +58,20 @@ export default function CustomControls() {
                   onChange={(e, value) => {
                     data.seed[`min_${control.name}`] = value[0];
                     data.seed[`max_${control.name}`] = value[1];
-                    data.setSeed(Object.create(data.seed))
+                    data.setSeed(Object.assign({}, data.seed))
                   }}
-                  onChangeCommitted={() => { }}
                   valueLabelDisplay={"auto"}
-                  aria-label={control.name}
-                  aria-labelledby={control.name}
-                  valueLabelFormat={value => (value * control.scale).toFixed(1)}
+                  valueLabelFormat={value => {
+                    if (control.range[1] < 100) {
+                      return (value * control.scale).toFixed(1);
+                    } else {
+                      return value
+                    }
+                  }}
                 />
               </>
             )
           })}
-
-
-
-
-          {/* <Typography id="range-slider" >
-            Danceability
-            </Typography>
-          <Slider
-            value={[10, 20]}
-            onChange={() => { }}
-            valueLabelDisplay="auto"
-            aria-labelledby="range-slider"
-            getAriaValueText={() => { }}
-          />
-          <Typography id="range-slider" >
-            Energy
-            </Typography>
-          <Slider
-            value={[10, 20]}
-            onChange={() => { }}
-            valueLabelDisplay="auto"
-            aria-labelledby="range-slider"
-            getAriaValueText={() => { }}
-          />
-          <Typography id="range-slider" >
-            Cheerfulness
-            </Typography>
-          <Slider
-            value={[10, 20]}
-            onChange={() => { }}
-            valueLabelDisplay="auto"
-            aria-labelledby="range-slider"
-            getAriaValueText={() => { }}
-          /> */}
         </Box>
       </Container>
     </Paper>

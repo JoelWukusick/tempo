@@ -8,14 +8,14 @@ import DataContext from './DataContext.jsx';
 
 
 export default function TabBar() {
-  const data = useContext(DataContext);
-  console.log(data.page)
+  const {page, setPage} = useContext(DataContext);
+
   return (
     <AppBar position="static" >
-      <Tabs value={data.page} variant={'fullWidth'}>
-        <Tab label='search' icon={<SearchIcon />} onClick={() => data.setPage('/')} value={'/'} component={Link} to={'/'} />
-        <Tab label='controls' icon={<TuneIcon />} onClick={() => data.setPage('/controls')} value={'/controls'} component={Link} to={'/controls'} />
-        <Tab label='playlist' icon={<QueueMusicIcon />} onClick={() => data.setPage('/playlist')} value={'/playlist'} component={Link} to={'/playlist'} />
+      <Tabs value={page} variant={'fullWidth'}>
+        <Tab label='search' icon={<SearchIcon />} onClick={() => setPage('/')} value={'/'} component={Link} to={'/'} />
+        <Tab label='controls' icon={<TuneIcon />} onClick={() => setPage('/controls')} value={'/controls'} component={Link} to={'/controls'} />
+        <Tab label='playlist' icon={<QueueMusicIcon />} onClick={() => setPage('/playlist')} value={'/playlist'} component={Link} to={'/playlist'} />
       </Tabs>
     </AppBar>
   );

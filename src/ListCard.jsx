@@ -3,7 +3,7 @@ import DataContext from './DataContext.jsx';
 import { ListItem, ListItemText, ListItemAvatar, Avatar } from '@material-ui/core';
 
 
-export default function AlignItemsList({ item }) {
+export default function AlignItemsList({ item, clickable }) {
   const data = useContext(DataContext);
 
   function handleAdd(item) {
@@ -19,7 +19,7 @@ export default function AlignItemsList({ item }) {
   }
 
   return (
-    <ListItem button alignItems="flex-start" onClick={() => handleAdd(item)}>
+    <ListItem button={clickable} alignItems="flex-start" onClick={() => handleAdd(item)}>
       <ListItemAvatar>
         <Avatar alt={item.name} src={item.images && item.images[2] ? item.images[2].url : null} />
       </ListItemAvatar>

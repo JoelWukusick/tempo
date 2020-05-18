@@ -13,8 +13,8 @@ export default function Header() {
   const classes = useStyles();
 
   return (
-    <AppBar position="static">
-      <Typography variant="h5" className={classes.title}>
+    <AppBar color='inherit' position="static">
+      <Typography color='primary' variant="h5" className={classes.title}>
         TEMPO
       </Typography>
 

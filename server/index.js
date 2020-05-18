@@ -20,7 +20,7 @@ app.get('/login', function (req, res) {
   let state = client.generateRandomString(16);
   res.cookie(stateKey, state
     // , { httpOnly: true }
-    );
+  );
   let scope = 'playlist-modify-public';
   res.redirect('https://accounts.spotify.com/authorize?' +
     querystring.stringify({
@@ -45,20 +45,13 @@ app.get('/callback', function (req, res) {
     res.clearCookie(stateKey);
     client.getUserAuth(code)
       .then((result) => {
-        res.cookie('access_token', result.access_token
-        // , { httpOnly: true }
-        );
-        res.cookie('refresh_token', result.refresh_token
-        // , { httpOnly: true }
-        );
-
-        return client.getUser(result.access_token)
+        let access_token = result.access_token;
+        let refresh_token = result.refresh_token;
+        return client.getUser(access_token)
           .then(result => {
             let id = result.id
-            res.cookie('username', result.display_name
-            // , { httpOnly: true }
-            );
-            res.redirect(`/`)
+            let query = querystring.stringify({ access_token, refresh_token, id })
+            res.redirect(`/#${query}`)
           })
       })
       .catch((err) => {
@@ -90,10 +83,16 @@ app.get('/api/search', (req, res) => {
         .then(data => {
           let results;
           if (req.query.type === 'artist') {
+            if (!data.artists.items) {
+              throw ('no results');
+            }
             results = (data.artists.items.map(artist => {
               return { name: artist.name, id: artist.id, images: artist.images, type: artist.type }
             }))
           } else {
+            if (!data.tracks.items) {
+              throw ('no results');
+            }
             results = (data.tracks.items.map(track => {
               return { name: track.name, id: track.id, images: track.album.images, artists: track.artists, type: track.type }
             }))
@@ -112,6 +111,9 @@ app.get('/api/recommendations', (req, res) => {
   } else {
     client.getRecommendations(req.query)
       .then(results => {
+        if (!results.tracks) {
+          throw ('no results');
+        }
         results = results.tracks.map(track => {
           return { artists: track.artists, type: 'track', name: track.name, id: track.id, images: track.album.images };
         });

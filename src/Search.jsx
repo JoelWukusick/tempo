@@ -43,7 +43,6 @@ export default function Search() {
       })
         .then(results => {
           setResults(results.data)
-          console.log(results)
         });
     }
     event.preventDefault();
@@ -88,7 +87,7 @@ export default function Search() {
         <Paper  >
           <List>
             {results.map(item => (
-              <ListCard item={item} />
+              <ListCard item={item} clickable={true}/>
             ))}
           </List>
         </Paper> :
