@@ -17,14 +17,12 @@ export default function SavePlaylist() {
   };
 
   function handleSave(e) {
-    console.log(access_token)
     setOpen(false);
     let headers = {
       'Authorization': `Bearer ${access_token}`,
       'Content-Type': 'application/json'
     };
     e.preventDefault();
-    console.log(`https://api.spotify.com/v1/users/${username}/playlists`)
     axios({
       method: 'post',
       url: `https://api.spotify.com/v1/users/${username}/playlists`,
@@ -33,7 +31,6 @@ export default function SavePlaylist() {
       json: true
     })
       .then((res) => {
-        console.log('result', res)
         let uris = playlist.map(track => `spotify:track:${track.id}`)
         axios({
           method: 'post',
