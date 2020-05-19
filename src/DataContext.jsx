@@ -10,6 +10,7 @@ function DataContextProvider(props) {
   const [seedStack, setSeedStack] = useState([]);
   const [playlist, setPlaylist] = useState([]);
   const [page, setPage] = useState('/');
+  const [controlScreen, setControlScreen] = useState('custom');
 
   return (
     <DataContext.Provider
@@ -20,7 +21,8 @@ function DataContextProvider(props) {
         seed, setSeed,
         seedStack, setSeedStack,
         playlist, setPlaylist,
-        page, setPage
+        page, setPage,
+        controlScreen, setControlScreen
       }}>
       {props.children}
     </DataContext.Provider>

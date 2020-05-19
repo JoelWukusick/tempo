@@ -5,11 +5,12 @@ import { Box, Container, Paper, Card, CardContent, CardActionArea, Typography, G
 import presets from './presets.js';
 
 
-export default function PresetControls() {
-  const { seed, setSeed } = useContext(DataContext);
+export default function PresetControls({setOption}) {
+  const { seed, setSeed, setControlScreen } = useContext(DataContext);
 
   function handleSelectPreset(preset) {
     setSeed(Object.assign(seed, preset.settings));
+    setControlScreen('custom');
   }
 
   return (

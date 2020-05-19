@@ -11,8 +11,7 @@ import axios from 'axios';
 
 
 export default function Controls() {
-  const [option, setOption] = useState('custom');
-  const { setPlaylist, seed, seedStack, setPage } = useContext(DataContext);
+  const { setPlaylist, seed, seedStack, setPage, controlScreen, setControlScreen } = useContext(DataContext);
 
   function getPlaylist() {
     setPage('/playlist');
@@ -49,13 +48,13 @@ export default function Controls() {
           <Box m={1} />
           <ToggleButtonGroup
             size='small'
-            value={option}
+            value={controlScreen}
             exclusive
             aria-label="search type">
-            <ToggleButton onClick={() => { setOption('custom') }} value='custom' component={Link} to={'/controls'} aria-label="centered">
+            <ToggleButton onClick={() => { setControlScreen('custom') }} value='custom' component={Link} to={'/controls'} aria-label="centered">
               custom
             </ToggleButton>
-            <ToggleButton onClick={() => { setOption('presets') }} value='presets' component={Link} to={'/controls/preset'} aria-label="right aligned">
+            <ToggleButton onClick={() => { setControlScreen('presets') }} value='presets' component={Link} to={'/controls/preset'} aria-label="right aligned">
               preset
             </ToggleButton>
           </ToggleButtonGroup>

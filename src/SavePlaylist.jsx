@@ -53,29 +53,31 @@ export default function SavePlaylist() {
       <Fab onClick={handleClickOpen} variant='extended' size='small' color='primary' disabled={playlist.length === 0 || username === 'demo'}>save playlist</Fab>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Save Playlist</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            Save playlist as a public playlist on your Spotify account.
+        <form>
+          <DialogContent>
+            <DialogContentText>
+              Save playlist as a public playlist on your Spotify account.
           </DialogContentText>
-          <TextField
-            value={playlistName}
-            onChange={e => setPlaylistName(e.target.value)}
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Playlist Name"
-            type="text"
-            fullWidth
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Cancel
+            <TextField
+              value={playlistName}
+              onChange={e => setPlaylistName(e.target.value)}
+              autoFocus
+              margin="dense"
+              id="name"
+              label="Playlist Name"
+              type="text"
+              fullWidth
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose} color="primary" >
+              Cancel
           </Button>
-          <Button onClick={handleSave} color="primary">
-            Save
+            <Button onClick={handleSave} color="primary" type='submit'>
+              Save
           </Button>
-        </DialogActions>
+          </DialogActions>
+        </form>
       </Dialog>
     </>
   )
