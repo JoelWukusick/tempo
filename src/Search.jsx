@@ -3,7 +3,6 @@ import { Box, List, Paper, Grid, Container, Fab, TextField, Avatar, Badge, GridL
 import { ToggleButton, ToggleButtonGroup } from '@material-ui/lab';
 import { makeStyles } from '@material-ui/core/styles';
 import ListCard from './ListCard.jsx';
-import SeedCard from './SeedCard.jsx';
 import queryString from 'query-string';
 import axios from 'axios';
 
@@ -13,7 +12,6 @@ const useStyles = makeStyles((theme) => ({
   button: {
   }
 }));
-
 
 export default function Search() {
   const classes = useStyles();
@@ -36,8 +34,6 @@ export default function Search() {
     }
     event.preventDefault();
   }
-
-
 
 
   return (
