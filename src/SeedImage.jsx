@@ -2,9 +2,15 @@
 import React from 'react';
 import { } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 
 const useStyles = makeStyles(theme => ({
   root: {
+    position: 'relative',
+    width: '100%',
+    height: '100%'
+  },
+  aspectRatioContainer: {
     width: '100%',
     paddingBottom: '100%',
     position: 'relative',
@@ -15,6 +21,7 @@ const useStyles = makeStyles(theme => ({
     userSelect: 'none',
   },
   image: {
+    cursor: 'pointer',
     width: '100%',
     height: '100%',
     position: 'absolute',
@@ -22,17 +29,37 @@ const useStyles = makeStyles(theme => ({
     objectFit: 'cover',
     color: 'transparent',
     textIndent: 10000
-  }
+  },
+  deleteIcon: {
+    color: theme.palette.primary.contrastText,
+    position: 'absolute',
+    [theme.breakpoints.down('xs')]: {
+      fontSize: '18px',
+      top: -9,
+      right: -9
+    },
+    [theme.breakpoints.up('sm')]: {
+      fontSize: '24px',
+      top: -12,
+      right: -12
+    },
+    boxSizing: 'border-box',
+    zIndex: 1,
+  },
 }))
 
 export default function SeedImage({ images, name }) {
-  console.log('images ', images, 'name ', name)
   const classes = useStyles();
 
   return (
-
     <div className={classes.root}>
-      <img className={classes.image} src={images && images[2] ? images[2].url : null} />
+      <HighlightOffIcon className={classes.deleteIcon} />
+      <div className={classes.aspectRatioContainer}>
+        {/* //   <Badge badgeContent={<HighlightOffIcon className={classes.deleteIcon} />}>
+                      //   <Avatar variant='rounded' src={item.images && item.images[2] ? item.images[2].url : null} />
+                      // </Badge> */}
+        <img className={classes.image} src={images && images[2] ? images[2].url : null} />
+      </div>
     </div>
   )
 }

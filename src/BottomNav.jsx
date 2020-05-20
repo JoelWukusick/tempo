@@ -16,6 +16,8 @@ const useStyles = makeStyles((theme) => ({
     right: 0,
     left: 0,
     padding: theme.spacing(1),
+    paddingTop: theme.spacing(2),
+    paddingBottom: theme.spacing(2),
     [theme.breakpoints.up('sm')]: {
       left: 100,
       padding: theme.spacing(2)
@@ -28,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
 
   },
   seed: {
-    maxWidth: '18vh'
+    maxWidth: '14vh'
   },
   deleteIcon: {
     color: theme.palette.primary.contrastText
@@ -81,8 +83,7 @@ export default function BottomNav() {
                     component={Link} to={'/controls'}
                     disabled={!seedStack[0]}
                     variant='extended'
-                    color='primary'
-                    fullWidth={true}>next</Fab>
+                    color='primary'>next</Fab>
                 </Grid>
               </Grid>
             </Grid>

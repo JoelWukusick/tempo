@@ -47,7 +47,6 @@ export default function SavePlaylist() {
         color='primary'
         disabled={seedStack.length === 0}
         variant='extended'
-        size='small'
         onClick={getPlaylist}
         component={Link}
         to={'/playlist'}>get playlist</Fab>
