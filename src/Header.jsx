@@ -5,7 +5,11 @@ import { AppBar, Toolbar, Typography } from '@material-ui/core';
 const useStyles = makeStyles((theme) => ({
   title: {
     fontWeight: '200',
-    padding: theme.spacing(1)
+    padding: theme.spacing(1),
+    paddingRight: theme.spacing(4),
+    [theme.breakpoints.up('sm')]: {
+      textAlign: 'right'
+    }
   }
 }));
 

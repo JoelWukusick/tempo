@@ -1,6 +1,15 @@
 import React, { useState } from 'react';
+import queryString from 'query-string';
 
 const DataContext = React.createContext()
+const hashParams = queryString.parse(window.location.hash);
+
+if (hashParams.id) {
+  sessionStorage.setItem('username', hashParams.id);
+  sessionStorage.setItem('access_token', hashParams.access_token);
+  sessionStorage.setItem('refresh_token', hashParams.refresh_token);
+  window.location.hash = '';
+}
 
 function DataContextProvider(props) {
   const [username, setUsername] = useState(sessionStorage.getItem('username'));

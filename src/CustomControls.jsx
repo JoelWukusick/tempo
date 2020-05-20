@@ -41,7 +41,7 @@ export default function CustomControls() {
   return (
     <Paper >
       <Container>
-        <Box py={4} px={1}>
+        <Box pt={4} px={1}>
           {controls.map(control => {
             return (
               <>

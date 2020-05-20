@@ -17,26 +17,26 @@ export default function Playlist() {
   return (
     <>
       <Container>
-        <Box my={1}>
+        <Box my={2}>
           <Grid container spacing={2} >
             <Grid item >
               <Button size='small' onClick={() => setPage('/')} component={Link} to={'/'}><ArrowBackIcon fontSize='small' />back</Button>
             </Grid>
           </Grid>
         </Box>
+        {playlist.length > 0 ?
+          <Box pb={10}>
+            <Paper  >
+              <List>
+                {playlist.map(item => (
+                  <ListCard item={item} clickable={false} />
+                ))}
+              </List>
+            </Paper>
+          </Box> :
+          null}
       </Container>
-      {playlist.length > 0 ?
-        <Paper  >
-          <List>
-            {playlist.map(item => (
-              <ListCard item={item} clickable={false} />
-            ))}
-          </List>
-        </Paper> :
-        null}
-      <BottomNav>
-        <SavePlaylist />
-      </BottomNav>
+      <BottomNav/>
     </>
   )
 }
