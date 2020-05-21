@@ -12,17 +12,15 @@ const stateKey = 'spotify_auth_state';
 var app = express();
 
 
-app.use('/user/:user', express.static('dist'))
+app.use('/', express.static('dist'))
   .use(cookieParser())
   .use(favicon('resources/favicon.ico'));
 
-app.get('/', (req, res) => {
-  res.redirect('/user/new');
-});
-
 app.get('/login', function (req, res) {
   let state = client.generateRandomString(16);
-  res.cookie(stateKey, state);
+  res.cookie(stateKey, state
+    // , { httpOnly: true }
+  );
   let scope = 'playlist-modify-public';
   res.redirect('https://accounts.spotify.com/authorize?' +
     querystring.stringify({
@@ -38,7 +36,6 @@ app.get('/callback', function (req, res) {
   var code = req.query.code || null;
   var state = req.query.state || null;
   var storedState = req.cookies ? req.cookies[stateKey] : null;
-
   if (state === null || state !== storedState) {
     res.redirect('/#' +
       querystring.stringify({
@@ -54,12 +51,12 @@ app.get('/callback', function (req, res) {
           .then(result => {
             let id = result.id
             let query = querystring.stringify({ access_token, refresh_token, id })
-            res.redirect(`/user/${result.display_name}/#${query}`)
+            res.redirect(`/#${query}`)
           })
       })
       .catch((err) => {
         console.log(err)
-        res.redirect('/user/demo/#' +
+        res.redirect('/?user=demo/#' +
           querystring.stringify({
             error: 'invalid_token'
           })
@@ -68,7 +65,7 @@ app.get('/callback', function (req, res) {
   }
 });
 
-app.get('/search', (req, res) => {
+app.get('/api/search', (req, res) => {
   let query = JSON.stringify(req.query);
   if (cache[query]) {
     res.send(cache[query])
@@ -86,10 +83,16 @@ app.get('/search', (req, res) => {
         .then(data => {
           let results;
           if (req.query.type === 'artist') {
+            if (!data.artists.items) {
+              throw ('no results');
+            }
             results = (data.artists.items.map(artist => {
               return { name: artist.name, id: artist.id, images: artist.images, type: artist.type }
             }))
           } else {
+            if (!data.tracks.items) {
+              throw ('no results');
+            }
             results = (data.tracks.items.map(track => {
               return { name: track.name, id: track.id, images: track.album.images, artists: track.artists, type: track.type }
             }))
@@ -101,13 +104,16 @@ app.get('/search', (req, res) => {
   }
 })
 
-app.get('/recommendations', (req, res) => {
+app.get('/api/recommendations', (req, res) => {
   let query = JSON.stringify(req.query);
   if (cache[query]) {
     res.send(cache[query])
   } else {
     client.getRecommendations(req.query)
       .then(results => {
+        if (!results.tracks) {
+          throw ('no results');
+        }
         results = results.tracks.map(track => {
           return { artists: track.artists, type: 'track', name: track.name, id: track.id, images: track.album.images };
         });
