@@ -1,15 +1,13 @@
 import React, { useContext } from 'react';
 import DataContext from './DataContext.jsx';
-import { Fab, Button, TextField, Dialog, DialogContent, DialogTitle, DialogContentText, DialogActions } from '@material-ui/core';
+import { Fab } from '@material-ui/core';
 import queryString from 'query-string';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 
-export default function SavePlaylist() {
+export default function GetPlaylist() {
   const { seed, setPlaylist, seedStack, setPage } = useContext(DataContext);
-  const [open, setOpen] = React.useState(false);
-  const [playlistName, setPlaylistName] = React.useState('');
 
   function getPlaylist() {
     setPage('/playlist');

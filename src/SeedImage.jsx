@@ -55,9 +55,6 @@ export default function SeedImage({ images, name }) {
     <div className={classes.root}>
       <HighlightOffIcon className={classes.deleteIcon} />
       <div className={classes.aspectRatioContainer}>
-        {/* //   <Badge badgeContent={<HighlightOffIcon className={classes.deleteIcon} />}>
-                      //   <Avatar variant='rounded' src={item.images && item.images[2] ? item.images[2].url : null} />
-                      // </Badge> */}
         <img className={classes.image} src={images && images[2] ? images[2].url : null} />
       </div>
     </div>

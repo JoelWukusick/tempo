@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import DataContext from './DataContext.jsx';
-import { Slider, Box, Container, Typography, Paper } from '@material-ui/core';
+import { Slider, Box, Container, Typography } from '@material-ui/core';
 
 
 export default function CustomControls() {
@@ -39,9 +39,8 @@ export default function CustomControls() {
   }];
 
   return (
-    <Paper >
       <Container>
-        <Box pt={4} px={1}>
+        <Box py={4} px={1}>
           {controls.map(control => {
             return (
               <>
@@ -74,6 +73,5 @@ export default function CustomControls() {
           })}
         </Box>
       </Container>
-    </Paper>
   )
 }

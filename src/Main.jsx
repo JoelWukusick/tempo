@@ -5,7 +5,7 @@ import Search from './Search.jsx';
 import Controls from './Controls.jsx';
 import Playlist from './Playlist.jsx';
 import { BrowserRouter, Route, Link } from "react-router-dom";
-import { Drawer, Divider, Tabs, Tab, AppBar } from '@material-ui/core';
+import { Drawer, Tabs, Tab, AppBar } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import TuneIcon from '@material-ui/icons/Tune';
@@ -26,9 +26,6 @@ const useStyles = makeStyles((theme) => ({
   navBar: {
     backgroundColor: theme.palette.primary.main,
     height: '100vh'
-  },
-  verticalTabs: {
-    backgroundColor: theme.palette.primary.main,
   },
   verticalTab: {
     width: '100px',

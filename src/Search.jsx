@@ -1,20 +1,11 @@
 import React, { useState } from 'react';
-import { Box, List, Paper, Grid, Container, Fab, TextField, Avatar, Badge, GridList } from '@material-ui/core';
+import { Box, Container, TextField } from '@material-ui/core';
 import { ToggleButton, ToggleButtonGroup } from '@material-ui/lab';
-import { makeStyles } from '@material-ui/core/styles';
-import ListCard from './ListCard.jsx';
+import DisplayItems from './DisplayItems.jsx';
 import queryString from 'query-string';
 import axios from 'axios';
 
-const useStyles = makeStyles((theme) => ({
-
-
-  button: {
-  }
-}));
-
 export default function Search() {
-  const classes = useStyles();
   const [type, setType] = useState('artist');
   const [q, setQ] = useState('');
   const [results, setResults] = useState([]);
@@ -34,7 +25,6 @@ export default function Search() {
     }
     event.preventDefault();
   }
-
 
   return (
     <>
@@ -60,17 +50,7 @@ export default function Search() {
             <TextField noValidate value={q} onChange={e => { setQ(e.target.value) }} autoComplete="off" fullWidth color='primary' id='search' label={`search`} variant="filled" />
           </form>
         </Box>
-        {results.length > 0 ?
-          <Box pb={10}>
-            <Paper >
-              <List>
-                {results.map(item => (
-                  <ListCard item={item} clickable={true} />
-                ))}
-              </List>
-            </Paper>
-          </Box> :
-          null}
+        {results.length > 0 ? <DisplayItems items={results} clickable /> : null}
       </Container >
     </>
   )

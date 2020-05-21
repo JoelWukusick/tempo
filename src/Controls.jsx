@@ -1,8 +1,8 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import DataContext from './DataContext.jsx';
 import BottomNav from './BottomNav.jsx';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
-import { Container, Fab, Grid, Button, Box } from '@material-ui/core';
+import { Container, Box } from '@material-ui/core';
 import { ToggleButton, ToggleButtonGroup } from '@material-ui/lab';
 import CustomControls from './CustomControls.jsx';
 import PresetControls from './PresetControls.jsx';
@@ -36,7 +36,6 @@ export default function Controls() {
           </Box>
         </Container>
       </BrowserRouter >
-      <BottomNav/>
     </>
   )
 

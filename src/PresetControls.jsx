@@ -14,9 +14,8 @@ export default function PresetControls({setOption}) {
   }
 
   return (
-    <Paper >
       <Container >
-        <Box py={4}>
+        <Box pt={4} pb='16vh'>
           <Grid container spacing={3} justify='center'>
             {presets.map(preset => {
               return (
@@ -40,6 +39,5 @@ export default function PresetControls({setOption}) {
           </Grid>
         </Box>
       </Container>
-    </Paper>
   )
 }
