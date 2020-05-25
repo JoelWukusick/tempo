@@ -21,17 +21,17 @@ export default function Controls() {
               value={controlScreen}
               exclusive
               aria-label="search type">
-              <ToggleButton onClick={() => { setControlScreen('custom') }} value='custom' component={Link} to={'/controls'} aria-label="centered">
-                custom
-            </ToggleButton>
-              <ToggleButton onClick={() => { setControlScreen('presets') }} value='presets' component={Link} to={'/controls/preset'} aria-label="right aligned">
+              <ToggleButton onClick={() => { setControlScreen('presets') }} value='presets' component={Link} to={'/controls'} aria-label="centered">
                 preset
+            </ToggleButton>
+              <ToggleButton onClick={() => { setControlScreen('custom') }} value='custom' component={Link} to={'/controls/custom'} aria-label="right aligned">
+                custom
             </ToggleButton>
             </ToggleButtonGroup>
           </Box >
           <Box pb={10}>
-            <Route exact path='/controls' component={CustomControls} />
-            <Route path='/controls/preset' component={PresetControls} />
+            <Route exact path='/controls' component={PresetControls} />
+            <Route path='/controls/custom' component={CustomControls} />
           </Box>
         </Container>
       </BrowserRouter >

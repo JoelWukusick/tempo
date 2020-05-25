@@ -21,7 +21,7 @@ export default function PresetControls({setOption}) {
               return (
                 <Grid item xs={6} sm={4} md={3} lg={2}>
                   <Card variant="outlined" >
-                    <CardActionArea component={Link} to={'/controls'} onClick={(e) => { handleSelectPreset(preset) }}>
+                    <CardActionArea component={Link} to={'/controls/custom'} onClick={(e) => { handleSelectPreset(preset) }}>
                       <CardContent>
                         <Typography variant="h6" component="h2" align='center'>
                           {preset.name}
