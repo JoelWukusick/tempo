@@ -1,8 +1,7 @@
 import React from 'react';
 import GridCard from './GridCard.jsx';
 import ListCard from './ListCard.jsx';
-import { Grid, List, Box } from '@material-ui/core';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { Grid, List, Box, useMediaQuery } from '@material-ui/core';
 import theme from './theme.js';
 
 

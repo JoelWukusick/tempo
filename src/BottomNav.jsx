@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import DataContext from './DataContext.jsx';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { BottomNavigation, Grid, Container, Box, Fab } from '@material-ui/core';
+import { BottomNavigation, Grid, Container, Box, Fab, useMediaQuery } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import theme from './theme.js';

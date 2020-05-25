@@ -5,12 +5,11 @@ import Search from './Search.jsx';
 import Controls from './Controls.jsx';
 import Playlist from './Playlist.jsx';
 import { BrowserRouter, Route, Link } from "react-router-dom";
-import { Drawer, Tabs, Tab, AppBar } from '@material-ui/core';
+import { Drawer, Tabs, Tab, AppBar, useMediaQuery } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import TuneIcon from '@material-ui/icons/Tune';
 import QueueMusicIcon from '@material-ui/icons/QueueMusic';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
 import theme from './theme.js';
 import BottomNav from './BottomNav.jsx';
 
