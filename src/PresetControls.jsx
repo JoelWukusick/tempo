@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import DataContext from './DataContext.jsx';
 import { Link } from 'react-router-dom';
-import { Box, Container, Paper, Card, CardContent, CardActionArea, Typography, Grid } from '@material-ui/core';
+import { Box, Container,  Card, CardContent, CardActionArea, Typography, Grid } from '@material-ui/core';
 import presets from './presets.js';
 
 

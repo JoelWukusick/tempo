@@ -24,12 +24,12 @@ function Login() {
   const classes = useStyles();
   return (
     <Container>
-      <Box py={18} px={4}>
+      <Box py={'20vh'} px={4}>
         <Grid className={classes.grid} container justify='center' spacing={3}  >
-          <Grid item xs={12} sm={8} md={4} lg={3} xl={2}>
+          <Grid item xs={12} sm={8} md={4} lg={3}>
             <Fab className={classes.button} color='primary' href='/login' variant='extended'>Log in with Spotify</Fab>
           </Grid>
-          <Grid item xs={12} sm={8} md={4} lg={3} xl={2}>
+          <Grid item xs={12} sm={8} md={4} lg={3}>
             <Fab className={classes.whiteButton} color='inherit' onClick={() => { setUsername('demo') }} variant='extended' >Continue without save option</Fab>
           </Grid>
         </Grid>

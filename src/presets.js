@@ -15,8 +15,8 @@ export default [
   {
     name: 'jog',
     settings: {
-      min_tempo: 130,
-      max_tempo: 140,
+      min_tempo: 138,
+      max_tempo: 150,
       min_danceability: .5,
       max_danceability: 1,
       min_energy: .3,

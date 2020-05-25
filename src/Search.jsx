@@ -10,27 +10,29 @@ export default function Search() {
   const [q, setQ] = useState('');
   const [results, setResults] = useState([]);
 
-  function handleSubmit(event) {
-    if (q) {
-      let stringifiedQuery = queryString.stringify({ type, q });
-      setQ('');
-      axios({
-        method: 'get',
-        url: `/api/search?${stringifiedQuery}`,
-        json: true
-      })
-        .then(results => {
-          setResults(results.data)
-        });
-    }
-    event.preventDefault();
+  function handleChange(event) {
+    setQ(event.target.value);
+    search(event.target.value);
+  }
+
+  function search(value) {
+    value = value.toLowerCase();
+    let stringifiedQuery = queryString.stringify({ type, q: value });
+    axios({
+      method: 'get',
+      url: `/api/search?${stringifiedQuery}`,
+      json: true
+    })
+      .then(results => {
+        setResults(results.data)
+      });
   }
 
   return (
     <>
       <Container >
         <Box m={2} >
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={e => e.preventDefault()}>
             <ToggleButtonGroup
               size='small'
               value={type}
@@ -47,7 +49,7 @@ export default function Search() {
             </ToggleButton>
             </ToggleButtonGroup>
             <Box m={2} />
-            <TextField noValidate value={q} onChange={e => { setQ(e.target.value) }} autoComplete="off" fullWidth color='primary' id='search' label={`search`} variant="filled" />
+            <TextField noValidate value={q} onChange={handleChange} autoComplete="off" fullWidth color='primary' id='search' label={`search`} variant="filled" />
           </form>
         </Box>
         {results.length > 0 ? <DisplayItems items={results} clickable /> : null}

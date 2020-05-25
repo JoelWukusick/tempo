@@ -27,8 +27,7 @@ const useStyles = makeStyles(theme => ({
     position: 'absolute',
     textAlign: 'center',
     objectFit: 'cover',
-    color: 'transparent',
-    textIndent: 10000
+    color: 'white'
   },
   deleteIcon: {
     color: theme.palette.primary.contrastText,
@@ -55,7 +54,7 @@ export default function SeedImage({ images, name }) {
     <div className={classes.root}>
       <HighlightOffIcon className={classes.deleteIcon} />
       <div className={classes.aspectRatioContainer}>
-        <img className={classes.image} src={images && images[2] ? images[2].url : null} />
+        <img className={classes.image} src={images && images[2] ? images[2].url : null} alt={name} />
       </div>
     </div>
   )

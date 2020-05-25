@@ -70,6 +70,7 @@ module.exports = {
     return getSpotify(url);
   },
   search: async (params) => {
+    params.limit = 10;
     let paramsString = queryString.stringify(params);
     let url = `https://api.spotify.com/v1/search?${paramsString}`;
     return getSpotify(url);

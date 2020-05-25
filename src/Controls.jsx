@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import DataContext from './DataContext.jsx';
-import BottomNav from './BottomNav.jsx';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import { Container, Box } from '@material-ui/core';
 import { ToggleButton, ToggleButtonGroup } from '@material-ui/lab';
