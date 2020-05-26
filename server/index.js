@@ -5,6 +5,7 @@ const { client_id, redirect_uri } = require('../spotify/config.js');
 const cookieParser = require('cookie-parser');
 var favicon = require('serve-favicon');
 
+const app = express();
 const port = 3000;
 const stateKey = 'spotify_auth_state';
 const redis = require('redis');
@@ -12,8 +13,6 @@ const redisCache = redis.createClient();
 redisCache.on('error', (err) => {
   console.log("Error " + err);
 });
-
-var app = express();
 
 
 app.use('/', express.static('dist'))

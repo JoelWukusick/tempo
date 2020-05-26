@@ -4,13 +4,12 @@ import ListCard from './ListCard.jsx';
 import { Grid, List, Box, useMediaQuery } from '@material-ui/core';
 import theme from './theme.js';
 
-
 export default function DisplayItems({ items, clickable }) {
-  const smallScreen = useMediaQuery(theme.breakpoints.up('sm'));
+  const mobile = useMediaQuery(theme.breakpoints.down('xs'));
 
   return (
     <Box pb='22vh'>
-      {smallScreen ?
+      {!mobile ?
         <Grid container spacing={4}>
           {items.map(item => (
             <GridCard item={item} clickable={clickable} />

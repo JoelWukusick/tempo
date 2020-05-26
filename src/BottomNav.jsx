@@ -19,16 +19,22 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(2),
     [theme.breakpoints.up('sm')]: {
       left: 100,
-      padding: theme.spacing(2)
     },
-    [theme.breakpoints.up('md')]: {
-      padding: theme.spacing(3)
+    [theme.breakpoints.up('xl')]: {
+      padding: theme.spacing(2)
     },
     height: 'auto',
     backgroundColor: 'rgba(0, 0, 0, 0.72)'
   },
   seed: {
-    maxWidth: '14vh'
+    maxWidth: '14vh',
+    minWidth: '48px',
+    [theme.breakpoints.up('sm')]: {
+      minWidth: '68px'
+    },
+    [theme.breakpoints.up('md')]: {
+      minWidth: '80px'
+    },
   },
   deleteIcon: {
     color: theme.palette.primary.contrastText

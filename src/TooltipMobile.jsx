@@ -3,7 +3,7 @@ import { Tooltip, ClickAwayListener, Typography } from '@material-ui/core';
 import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
 
 export default function TooltipMobile({ title }) {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   return (
     <ClickAwayListener onClickAway={() => setOpen(false)}>
