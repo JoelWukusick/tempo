@@ -3,6 +3,7 @@ var querystring = require('querystring');
 const client = require('../server/spotify.js');
 const { client_id, redirect_uri } = require('../spotify/config.js');
 const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 var favicon = require('serve-favicon');
 
 const app = express();
@@ -16,6 +17,7 @@ redisCache.on('error', (err) => {
 
 
 app.use('/', express.static('dist'))
+  .use(bodyParser.json())
   .use(cookieParser())
   .use(favicon('resources/favicon.ico'));
 
@@ -110,6 +112,13 @@ app.get('/api/search', (req, res) => {
       }
     }
   })
+})
+
+app.post('/api/refresh_token', (req, res) => {
+  client.refreshUserAuth(req.body.refresh_token)
+    .then(response => {
+      res.send({ access_token: response.access_token })
+    })
 })
 
 app.get('/api/recommendations', (req, res) => {

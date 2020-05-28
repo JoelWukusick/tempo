@@ -24,6 +24,16 @@ var userAuthOptions = {
   json: true
 };
 
+var userRefreshOptions = {
+  url: 'https://accounts.spotify.com/api/token',
+  headers: {
+    'Authorization': 'Basic ' + (new Buffer.from(client_id + ':' + client_secret).toString('base64'))
+  },
+  form: {
+    grant_type: 'refresh_token'
+  },
+  json: true
+}
 
 module.exports = {
   tokenAsync: async () => {
@@ -39,6 +49,17 @@ module.exports = {
   userAuthAsync: async (code) => {
     userAuthOptions.form.code = code;
     return rp.post(userAuthOptions)
+      .then(body => {
+        return body;
+      })
+      .catch(err => {
+        console.log(err);
+        return;
+      })
+  },
+  userRefreshAsync: async (refresh_token) => {
+    userRefreshOptions.form.refresh_token = refresh_token;
+    return rp.post(userRefreshOptions)
       .then(body => {
         return body;
       })
