@@ -41,7 +41,6 @@ export default function GetPlaylist() {
   return (
     <>
       <Fab
-        noWrap
         color='primary'
         disabled={seedStack.length === 0}
         variant='extended'

@@ -4,7 +4,7 @@ import { Fab, Button, TextField, Dialog, DialogContent, DialogTitle, DialogConte
 import axios from 'axios';
 
 export default function SavePlaylist() {
-  const { playlist, username, access_token } = useContext(DataContext);
+  const { playlist, username, access_token, refresh_token, setAccess_token, setRefresh_token } = useContext(DataContext);
   const [open, setOpen] = React.useState(false);
   const [playlistName, setPlaylistName] = React.useState('');
 
@@ -16,14 +16,12 @@ export default function SavePlaylist() {
     setOpen(false);
   };
 
-  function handleSave(e) {
-    setOpen(false);
+  function postPlaylist(token) {
     let headers = {
-      'Authorization': `Bearer ${access_token}`,
+      'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json'
     };
-    e.preventDefault();
-    axios({
+    return axios({
       method: 'post',
       url: `https://api.spotify.com/v1/users/${username}/playlists`,
       headers,
@@ -43,8 +41,29 @@ export default function SavePlaylist() {
       .then(res => {
         alert(`'${playlistName}' saved to your spotify account!`)
       })
-      .catch(err => {
-        alert(`Unable to save playlist: ${err}`);
+  }
+
+  function handleSave(e) {
+    e.preventDefault();
+    setOpen(false);
+    postPlaylist(access_token)
+      .catch((err) => {
+        if (err.response.status === 401) {
+          axios({
+            method: 'post',
+            url: '/api/refresh_token',
+            data: { refresh_token },
+            json: true
+          })
+            .then(res => {
+              setAccess_token(res.data.access_token);
+              sessionStorage.setItem('access_token', res.data.access_token);
+              postPlaylist(res.data.access_token)
+                .catch(err => alert(`Unable to save playlist: ${err}`));
+            })
+        } else {
+          alert(`Unable to save playlist: ${err}`);
+        }
       });
   }
 

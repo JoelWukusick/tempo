@@ -1,4 +1,4 @@
-const { tokenAsync, userAuthAsync } = require('../spotify/clientAuth.js');
+const { tokenAsync, userAuthAsync, userRefreshAsync } = require('../spotify/clientAuth.js');
 const rp = require('request-promise-native');
 const queryString = require('query-string');
 
@@ -10,14 +10,6 @@ const getToken = (() => {
       return token;
     }
     token = token || tokenAsync();
-    return token;
-  }
-})();
-
-const getAuth = (() => {
-  let token;
-  return async (code) => {
-    token = userAuthAsync(code);
     return token;
   }
 })();
@@ -70,6 +62,7 @@ module.exports = {
     return getSpotify(url);
   },
   search: async (params) => {
+    params.limit = 10;
     let paramsString = queryString.stringify(params);
     let url = `https://api.spotify.com/v1/search?${paramsString}`;
     return getSpotify(url);
@@ -83,7 +76,10 @@ module.exports = {
     return rp(options);
   },
   getUserAuth: async (code) => {
-    return getAuth(code);
+    return userAuthAsync(code);
+  },
+  refreshUserAuth: async (refresh_token) => {
+    return userRefreshAsync(refresh_token);
   },
   generateRandomString: (length) => {
     var text = '';

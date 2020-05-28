@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import DataContext from './DataContext.jsx';
-import BottomNav from './BottomNav.jsx';
 import DisplayItems from './DisplayItems.jsx';
 import { Container, Box, Grid, Button } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
