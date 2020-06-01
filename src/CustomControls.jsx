@@ -53,8 +53,7 @@ export default function CustomControls() {
               <Tooltip title={control.description} placement='top-start' arrow>
                 <Typography id={control.name} display='inline'>
                   {`${control.label} `}
-                  {mobile ? <TooltipMobile title={control.description}>
-                  </TooltipMobile> : null}
+                  {mobile ? <TooltipMobile title={control.description} /> : null}
                 </Typography>
               </Tooltip>
               <Slider
