@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import DataContext from './DataContext.jsx';
 import { Slider, Box, Container, Typography, Tooltip, useMediaQuery } from '@material-ui/core';
 import TooltipMobile from './TooltipMobile.jsx';
-import theme from './theme.js';
+import theme from './theme.jsx';
 
 export default function CustomControls() {
   const data = useContext(DataContext);

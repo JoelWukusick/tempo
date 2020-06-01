@@ -14,11 +14,7 @@ export default function Playlist() {
     <>
       <Container>
         <Box my={2}>
-          <Grid container spacing={2} >
-            <Grid item >
-              <Button size='small' onClick={() => setPage('/')} component={Link} to={'/'}><ArrowBackIcon fontSize='small' />back</Button>
-            </Grid>
-          </Grid>
+          <Button size='small' onClick={() => setPage('/')} component={Link} to={'/'}><ArrowBackIcon fontSize='small' />back</Button>
         </Box>
         {playlist.length > 0 ? <DisplayItems items={playlist} clickable={false} /> : null}
       </Container>

@@ -2,7 +2,7 @@ import React from 'react';
 import GridCard from './GridCard.jsx';
 import ListCard from './ListCard.jsx';
 import { Grid, List, Box, useMediaQuery } from '@material-ui/core';
-import theme from './theme.js';
+import theme from './theme.jsx';
 
 export default function DisplayItems({ items, clickable }) {
   const mobile = useMediaQuery(theme.breakpoints.down('xs'));
