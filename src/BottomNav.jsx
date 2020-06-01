@@ -3,7 +3,7 @@ import DataContext from './DataContext.jsx';
 import { BottomNavigation, Grid, Container, Box, Fab, useMediaQuery } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
-import theme from './theme.js';
+import theme from './theme.jsx';
 import SeedImage from './SeedImage.jsx';
 import SavePlaylist from './SavePlaylist.jsx';
 import GetPlaylist from './GetPlaylist.jsx';

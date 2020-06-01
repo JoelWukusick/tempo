@@ -10,7 +10,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import TuneIcon from '@material-ui/icons/Tune';
 import QueueMusicIcon from '@material-ui/icons/QueueMusic';
-import theme from './theme.js';
+import theme from './theme.jsx';
 import BottomNav from './BottomNav.jsx';
 
 const useStyles = makeStyles((theme) => ({
