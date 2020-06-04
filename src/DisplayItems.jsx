@@ -10,7 +10,7 @@ export default function DisplayItems({ items, clickable }) {
   return (
     <Box pb='22vh'>
       {!mobile ?
-        <Grid container spacing={4}>
+        <Grid container spacing={2}>
           {items.map(item => (
             <GridCard item={item} clickable={clickable} />
           ))}

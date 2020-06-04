@@ -36,12 +36,10 @@ export default function GetPlaylist() {
       });
   }
 
-
-
   return (
     <>
       <Fab
-        color='primary'
+        color='secondary'
         disabled={seedStack.length === 0}
         variant='extended'
         onClick={getPlaylist}

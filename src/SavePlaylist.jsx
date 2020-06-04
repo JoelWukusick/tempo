@@ -69,7 +69,7 @@ export default function SavePlaylist() {
 
   return (
     <>
-      <Fab onClick={handleClickOpen} variant='extended' color='primary' disabled={playlist.length === 0 || username === 'demo'}>save playlist</Fab>
+      <Fab onClick={handleClickOpen} variant='extended' color='secondary' disabled={playlist.length === 0 || username === 'demo'}>save playlist</Fab>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Save Playlist</DialogTitle>
         <form>

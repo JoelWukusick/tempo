@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: theme.spacing(2),
     paddingBottom: theme.spacing(2),
     [theme.breakpoints.up('sm')]: {
-      left: 100,
+      left: 72,
     },
     [theme.breakpoints.up('xl')]: {
       padding: theme.spacing(2)
@@ -87,7 +87,7 @@ export default function BottomNav() {
                     component={Link} to={'/controls'}
                     disabled={!seedStack[0]}
                     variant='extended'
-                    color='primary'>next</Fab>
+                    color='secondary'>next</Fab>
                 </Grid>
               </Grid>
             </Grid>

@@ -6,7 +6,6 @@ import { Container, Box, Grid, Button } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 
-
 export default function Playlist() {
   const { playlist, setPage } = useContext(DataContext);
 

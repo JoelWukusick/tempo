@@ -31,7 +31,7 @@ export default function Search() {
   return (
     <>
       <Container >
-        <Box m={2} >
+        <Box my={2} >
           <form onSubmit={e => e.preventDefault()}>
             <ToggleButtonGroup
               size='small'

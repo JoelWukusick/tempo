@@ -34,10 +34,10 @@ export default function GridCard({ item, clickable }) {
         className={classes.cardMedia}
         image={item.images && item.images[1] ? item.images[1].url : null} />
       <CardContent >
-        <Typography className={classes.text} gutterBottom variant="h5" component="h2">
+        <Typography className={classes.text} variant='h6' >
           {item.name}
         </Typography>
-        <Typography className={classes.text}>
+        <Typography className={classes.text} >
           {item.artists ? item.artists.map((artist, i, artists) => i === artists.length - 1 ? `${artist.name}` : `${artist.name}, `) : null}
         </Typography>
       </CardContent>
@@ -56,7 +56,7 @@ export default function GridCard({ item, clickable }) {
   }
 
   return (
-    <Grid item xs={12} sm={6} md={4}>
+    <Grid item sm={4} md={3}>
       <Card className={classes.card} key={item.name} raised={false} onClick={() => { clickable ? handleAdd(item) : null }}>
         <div className={classes.stretch}>
           {clickable ?

@@ -15,7 +15,8 @@ import BottomNav from './BottomNav.jsx';
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
-    height: '48px'
+    height: 'calc(50vh - 120px)',
+    maxHeight: '112px'
   },
   content: {
     [theme.breakpoints.up('sm')]: {
@@ -27,10 +28,10 @@ const useStyles = makeStyles((theme) => ({
     height: '100vh'
   },
   verticalTab: {
-    width: '100px',
-    minWidth: '100px',
-    height: '100px',
-    color: theme.palette.primary.contrastText
+    width: '72px',
+    minWidth: '72px',
+    height: '80px',
+    fontSize: '10px'
   }
 }));
 
@@ -48,10 +49,10 @@ export default function Main() {
             anchor="left"
           ><div className={classes.navBar}>
               <div className={classes.toolbar} />
-              <Tabs value={page} orientation='vertical' >
-                <Tab className={classes.verticalTab} label='search' icon={<SearchIcon />} onClick={() => setPage('/')} value={'/'} component={Link} to={'/'} />
-                <Tab className={classes.verticalTab} label='controls' icon={<TuneIcon />} onClick={() => setPage('/controls')} value={'/controls'} component={Link} to={'/controls'} />
-                <Tab className={classes.verticalTab} label='playlist' icon={<QueueMusicIcon />} onClick={() => setPage('/playlist')} value={'/playlist'} component={Link} to={'/playlist'} />
+              <Tabs value={page} orientation='vertical'>
+                <Tab className={classes.verticalTab} label='search' icon={<SearchIcon fontSize='large' />} onClick={() => setPage('/')} value={'/'} component={Link} to={'/'} />
+                <Tab className={classes.verticalTab} label='controls' icon={<TuneIcon fontSize='large'/>} onClick={() => setPage('/controls')} value={'/controls'} component={Link} to={'/controls'} />
+                <Tab className={classes.verticalTab} label='playlist' icon={<QueueMusicIcon fontSize='large'/>} onClick={() => setPage('/playlist')} value={'/playlist'} component={Link} to={'/playlist'} />
               </Tabs>
             </div>
           </Drawer> :
