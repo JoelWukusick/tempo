@@ -2,6 +2,11 @@ import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
 
 const theme = createMuiTheme({
   overrides: {
+    MuiButton: {
+      root: {
+        textTransform: 'none',
+      }
+    },
     MuiTabs: {
       indicator: { width: '8px', height: '8px' }
     },
