@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import DataContext from './DataContext.jsx';
 import { makeStyles } from '@material-ui/core/styles';
+import { Link } from "react-router-dom";
 import { AppBar, Typography, Button, Toolbar } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -26,7 +27,14 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Header() {
   const classes = useStyles();
-  const { username } = useContext(DataContext);
+  const { username, setUsername } = useContext(DataContext);
+  const logout = () => {
+    setUsername(null);
+    sessionStorage.removeItem('username');
+    sessionStorage.removeItem('access_token');
+    sessionStorage.removeItem('refresh_token');
+  }
+
   console.log(username)
   return (
     <AppBar color='primary' position='static' elevation={0}>
@@ -34,8 +42,23 @@ export default function Header() {
         <Typography color='inherit' variant="h5" className={classes.title}>
           TEMPO
         </Typography>
-        <Button color="inherit">{username === 'demo' ? 'login' : username ? 'sign out' : null}</Button>
-        <Button className={classes.buttonRight} color="inherit">help</Button>
+        {username === 'demo' ?
+          <Button
+            onClick={() => { setUsername(null) }}
+            color="inherit">
+            login</Button> :
+          username ?
+            <Button
+              onClick={logout}
+              color="inherit">
+              sign out</Button> :
+            null
+        }
+        <Button
+          className={classes.buttonRight}
+          color="inherit">
+          help
+        </Button>
       </Toolbar>
     </AppBar>
   )
