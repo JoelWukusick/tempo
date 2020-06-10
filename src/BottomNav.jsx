@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
       padding: theme.spacing(2)
     },
     height: 'auto',
-    backgroundColor: 'rgba(0, 0, 0, 0.72)'
+    backgroundColor: 'rgba(34, 42, 62, .80)'
   },
   seed: {
     maxWidth: '14vh',

@@ -8,7 +8,7 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     textAlign: 'center',
   },
-  whiteButton: {
+  brightButton: {
     width: '100%',
     textAlign: 'center',
     color: theme.palette.primary.main
@@ -27,10 +27,10 @@ function Login() {
       <Box py={'20vh'} px={4}>
         <Grid className={classes.grid} container justify='center' spacing={3}  >
           <Grid item xs={12} sm={8} md={4} lg={3}>
-            <Fab className={classes.button} color='primary' href='/login' variant='extended'>Log in with Spotify</Fab>
+            <Fab className={classes.brightButton} color='secondary' href='/login' variant='extended'>Log in with Spotify</Fab>
           </Grid>
           <Grid item xs={12} sm={8} md={4} lg={3}>
-            <Fab className={classes.whiteButton} color='inherit' onClick={() => { setUsername('demo') }} variant='extended' >Continue without save option</Fab>
+            <Fab className={classes.button} color='primary' onClick={() => { setUsername('demo') }} variant='extended' >Continue without save option</Fab>
           </Grid>
         </Grid>
       </Box>

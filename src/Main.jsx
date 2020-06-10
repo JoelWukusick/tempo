@@ -21,18 +21,24 @@ const useStyles = makeStyles((theme) => ({
   content: {
     [theme.breakpoints.up('sm')]: {
       marginLeft: '100px'
+    },
+  },
+  spacer: {
+    [theme.breakpoints.up('sm')]: {
+      height: 'calc(50vh - 152px)',
+      maxHeight: '80px',
+      minHeight: '16px'
     }
   },
   navBar: {
-    backgroundColor: theme.palette.primary.main,
+    backgroundColor: theme.palette.background.paper,
     height: '100vh'
   },
   verticalTab: {
-    width: '72px',
-    minWidth: '72px',
-    height: '80px',
-    fontSize: '10px'
-  }
+    width: '74px',
+    minWidth: '74px',
+    height: '82px',
+  },
 }));
 
 export default function Main() {
@@ -51,8 +57,8 @@ export default function Main() {
               <div className={classes.toolbar} />
               <Tabs value={page} orientation='vertical'>
                 <Tab className={classes.verticalTab} label='search' icon={<SearchIcon fontSize='large' />} onClick={() => setPage('/')} value={'/'} component={Link} to={'/'} />
-                <Tab className={classes.verticalTab} label='controls' icon={<TuneIcon fontSize='large'/>} onClick={() => setPage('/controls')} value={'/controls'} component={Link} to={'/controls'} />
-                <Tab className={classes.verticalTab} label='playlist' icon={<QueueMusicIcon fontSize='large'/>} onClick={() => setPage('/playlist')} value={'/playlist'} component={Link} to={'/playlist'} />
+                <Tab className={classes.verticalTab} label='controls' icon={<TuneIcon fontSize='large' />} onClick={() => setPage('/controls')} value={'/controls'} component={Link} to={'/controls'} />
+                <Tab className={classes.verticalTab} label='playlist' icon={<QueueMusicIcon fontSize='large' />} onClick={() => setPage('/playlist')} value={'/playlist'} component={Link} to={'/playlist'} />
               </Tabs>
             </div>
           </Drawer> :
@@ -65,6 +71,7 @@ export default function Main() {
           </AppBar >
         }
         <div className={classes.content}>
+          <div className={classes.spacer} />
           <Route path='/' exact component={Search} />
           <Route path='/controls' component={Controls} />
           <Route path='/playlist' component={Playlist} />

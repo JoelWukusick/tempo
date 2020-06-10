@@ -5,10 +5,10 @@ import { AppBar, Typography } from '@material-ui/core';
 const useStyles = makeStyles((theme) => ({
   title: {
     fontWeight: '200',
-    padding: theme.spacing(1),
+    padding: theme.spacing(.5),
     paddingRight: theme.spacing(4),
     [theme.breakpoints.up('sm')]: {
-      textAlign: 'right'
+      marginLeft: '84px'
     }
   }
 }));
@@ -17,11 +17,10 @@ export default function Header() {
   const classes = useStyles();
 
   return (
-    <AppBar color='inherit' position='static' elevation={0}>
-      <Typography color='primary' variant="h5" className={classes.title}>
+    <AppBar color='primary' position='static' elevation={0}>
+      <Typography color='inherit' variant="h5" className={classes.title}>
         TEMPO
       </Typography>
-
     </AppBar>
   )
 }

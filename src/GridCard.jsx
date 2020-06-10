@@ -22,6 +22,12 @@ const useStyles = makeStyles(theme => ({
     overflow: 'hidden',
     whiteSpace: 'nowrap',
     textOverflow: 'ellipsis'
+  },
+  title: {
+    fontSize: '14px'
+  },
+  artist: {
+    fontSize: '12px'
   }
 }))
 
@@ -34,10 +40,10 @@ export default function GridCard({ item, clickable }) {
         className={classes.cardMedia}
         image={item.images && item.images[1] ? item.images[1].url : null} />
       <CardContent >
-        <Typography className={classes.text} variant='h6' >
+        <Typography className={`${classes.text} ${classes.title}`} variant='h6' >
           {item.name}
         </Typography>
-        <Typography className={classes.text} >
+        <Typography className={`${classes.text} ${classes.artist}`} >
           {item.artists ? item.artists.map((artist, i, artists) => i === artists.length - 1 ? `${artist.name}` : `${artist.name}, `) : null}
         </Typography>
       </CardContent>

@@ -17,7 +17,6 @@ export default function Controls() {
         <Container>
           <Box m={2} >
             <ToggleButtonGroup
-              size='small'
               value={controlScreen}
               exclusive
               aria-label="search type">
