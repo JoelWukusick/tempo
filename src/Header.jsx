@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import DataContext from './DataContext.jsx';
+import Help from './Help.jsx';
 import { makeStyles } from '@material-ui/core/styles';
-import { Link } from "react-router-dom";
 import { AppBar, Typography, Button, Toolbar } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -17,12 +17,6 @@ const useStyles = makeStyles((theme) => ({
   toolbar: {
     minHeight: '32px'
   },
-  buttonRight: {
-    marginRight: 'calc((100vw - 1354px)/2)',
-    [theme.breakpoints.down('md')]: {
-      marginRight: '0px'
-    }
-  }
 }));
 
 export default function Header() {
@@ -54,11 +48,7 @@ export default function Header() {
               sign out</Button> :
             null
         }
-        <Button
-          className={classes.buttonRight}
-          color="inherit">
-          help
-        </Button>
+        <Help />
       </Toolbar>
     </AppBar>
   )
