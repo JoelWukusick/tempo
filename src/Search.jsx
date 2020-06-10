@@ -55,7 +55,7 @@ export default function Search() {
             fullWidth
             color='primary'
             id='search'
-            label={`search`}
+            label='search'
             variant='filled' />
         </form>
         {results.length > 0 ? <DisplayItems items={results} clickable /> : null}

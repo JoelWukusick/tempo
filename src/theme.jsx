@@ -3,7 +3,7 @@ import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
 const theme = createMuiTheme({
   overrides: {
     MuiTabs: {
-      indicator: { width: '8px' }
+      indicator: { width: '8px', height: '8px' }
     },
     MuiTab: {
       root: {

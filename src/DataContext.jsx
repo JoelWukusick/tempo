@@ -19,7 +19,7 @@ function DataContextProvider(props) {
   const [seedStack, setSeedStack] = useState([]);
   const [playlist, setPlaylist] = useState([]);
   const [page, setPage] = useState('/');
-  const [controlScreen, setControlScreen] = useState('custom');
+  const [controlScreen, setControlScreen] = useState('presets');
 
   return (
     <DataContext.Provider

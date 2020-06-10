@@ -24,11 +24,12 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   spacer: {
-    [theme.breakpoints.up('sm')]: {
-      height: 'calc(50vh - 152px)',
-      maxHeight: '80px',
-      minHeight: '16px'
-    }
+    height: 'calc(50vh - 152px)',
+    maxHeight: '80px',
+    minHeight: '16px',
+    [theme.breakpoints.down('xs')]: {
+      maxHeight: '16px'
+    },
   },
   navBar: {
     backgroundColor: theme.palette.background.paper,
@@ -42,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Main() {
-  const { username, page, setPage } = useContext(DataContext);
+  const { username, page, setPage, setControlScreen } = useContext(DataContext);
   const classes = useStyles();
   const largeScreen = useMediaQuery(theme.breakpoints.up('sm'));
 
@@ -62,10 +63,10 @@ export default function Main() {
               </Tabs>
             </div>
           </Drawer> :
-          <AppBar position="static" >
+          <AppBar position="static" color='inherit'>
             <Tabs value={page} variant={'fullWidth'}>
               <Tab label='search' icon={<SearchIcon />} onClick={() => setPage('/')} value={'/'} component={Link} to={'/'} />
-              <Tab label='controls' icon={<TuneIcon />} onClick={() => setPage('/controls')} value={'/controls'} component={Link} to={'/controls'} />
+              <Tab label='controls' icon={<TuneIcon />} onClick={() => { setControlScreen('presets'); setPage('/controls'); }} value={'/controls'} component={Link} to={'/controls'} />
               <Tab label='playlist' icon={<QueueMusicIcon />} onClick={() => setPage('/playlist')} value={'/playlist'} component={Link} to={'/playlist'} />
             </Tabs>
           </AppBar >

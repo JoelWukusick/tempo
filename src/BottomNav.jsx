@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function BottomNav() {
   const classes = useStyles();
-  const { seedStack, setSeedStack, seed, setSeed, page, setPage } = useContext(DataContext);
+  const { seedStack, setSeedStack, seed, setSeed, page, setPage, setControlScreen } = useContext(DataContext);
   const smallScreen = useMediaQuery(theme.breakpoints.up('sm'))
   const mediumScreen = useMediaQuery(theme.breakpoints.up('md'));
   const largeScreen = useMediaQuery(theme.breakpoints.up('lg'));
@@ -83,7 +83,7 @@ export default function BottomNav() {
                 <Grid item xs={12}>
                   <Fab
                     className={classes.button}
-                    onClick={() => { setPage('/controls') }}
+                    onClick={() => { setPage('/controls'); setControlScreen('presets') }}
                     component={Link} to={'/controls'}
                     disabled={!seedStack[0]}
                     variant='extended'

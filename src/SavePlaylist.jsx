@@ -79,6 +79,7 @@ export default function SavePlaylist() {
           </DialogContentText>
             <TextField
               value={playlistName}
+              color='primary'
               onChange={e => setPlaylistName(e.target.value)}
               autoFocus
               margin="dense"
@@ -86,13 +87,14 @@ export default function SavePlaylist() {
               label="Playlist Name"
               type="text"
               fullWidth
+              variant='filled'
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleClose} color="primary" >
+            <Button onClick={handleClose} color="secondary" >
               Cancel
           </Button>
-            <Button onClick={handleSave} color="primary" type='submit'>
+            <Button onClick={handleSave} color="secondary" type='submit'>
               Save
           </Button>
           </DialogActions>

@@ -15,7 +15,6 @@ export default function Controls() {
     <>
       <BrowserRouter>
         <Container>
-          <Box m={2} >
             <ToggleButtonGroup
               value={controlScreen}
               exclusive
@@ -27,7 +26,6 @@ export default function Controls() {
                 custom
             </ToggleButton>
             </ToggleButtonGroup>
-          </Box >
           <Box pb={10}>
             <Route exact path='/controls' component={PresetControls} />
             <Route path='/controls/custom' component={CustomControls} />
