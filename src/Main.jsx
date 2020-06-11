@@ -58,7 +58,7 @@ export default function Main() {
               <div className={classes.toolbar} />
               <Tabs value={page} orientation='vertical'>
                 <Tab className={classes.verticalTab} label='search' icon={<SearchIcon fontSize='large' />} onClick={() => setPage('/')} value={'/'} component={Link} to={'/'} />
-                <Tab className={classes.verticalTab} label='controls' icon={<TuneIcon fontSize='large' />} onClick={() => setPage('/controls')} value={'/controls'} component={Link} to={'/controls'} />
+                <Tab className={classes.verticalTab} label='controls' icon={<TuneIcon fontSize='large' />} onClick={() => { setControlScreen('presets'); setPage('/controls'); }} value={'/controls'} component={Link} to={'/controls'} />
                 <Tab className={classes.verticalTab} label='playlist' icon={<QueueMusicIcon fontSize='large' />} onClick={() => setPage('/playlist')} value={'/playlist'} component={Link} to={'/playlist'} />
               </Tabs>
             </div>
