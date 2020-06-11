@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
   artist: {
     fontSize: '12px'
   }
-}))
+}));
 
 export default function GridCard({ item, clickable }) {
   const classes = useStyles();

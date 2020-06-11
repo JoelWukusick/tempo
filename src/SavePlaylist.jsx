@@ -91,10 +91,10 @@ export default function SavePlaylist() {
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleClose} color="secondary" >
+            <Button onClick={handleClose} color='inherit' >
               Cancel
           </Button>
-            <Button onClick={handleSave} color="secondary" type='submit'>
+            <Button onClick={handleSave} color='inherit' type='submit'>
               Save
           </Button>
           </DialogActions>

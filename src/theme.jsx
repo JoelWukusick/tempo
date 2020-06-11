@@ -46,9 +46,11 @@ const theme = createMuiTheme({
     MuiTextField: { root: { backgroundColor: '#fff' } },
     MuiFilledInput: { input: { color: '#000' } },
     MuiSlider: {
-      rail: { backgroundColor: '#A3B1B9'},
-      track: {backgroundColor: '#3C7F8B'},
-      thumb: { backgroundColor: '#3C7F8B'},
+      rail: { backgroundColor: '#090D24', opacity: '.9', height: '1px' },
+      track: { backgroundColor: '#A3B1B9', opacity: '.8'},
+      thumb: { backgroundColor: '#A3B1B9' },
+      valueLabel: { color: '#1E2738', opacity: '.9' },
+      markLabelActive: { opacity: '.7'}
     }
   },
   palette: {
@@ -56,9 +58,6 @@ const theme = createMuiTheme({
     primary: { main: '#090D24' },
     secondary: { main: '#F39D83' },
     background: { default: '#384359', paper: '#1E2738' },
-    text: {
-      primary: '#fff',
-    }
   },
   typography: {
     fontSize: 12

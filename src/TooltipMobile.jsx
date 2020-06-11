@@ -1,8 +1,17 @@
 import React, { useState } from 'react';
 import { Tooltip, ClickAwayListener, Typography } from '@material-ui/core';
 import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+  icon: {
+    color: theme.palette.text.disabled,
+    marginLeft: theme.spacing(1)
+  }
+}));
 
 export default function TooltipMobile({ title }) {
+  const classes = useStyles();
   const [open, setOpen] = useState(false);
 
   return (
@@ -21,7 +30,7 @@ export default function TooltipMobile({ title }) {
           disableTouchListener
           title={title}
         >
-          <HelpOutlineIcon onClick={() => setOpen(true)} fontSize='small' />
+          <HelpOutlineIcon className={classes.icon} onClick={() => setOpen(true)} fontSize='small' />
         </Tooltip>
       </Typography >
     </ClickAwayListener >

@@ -17,6 +17,9 @@ const useStyles = makeStyles((theme) => ({
   toolbar: {
     minHeight: '32px'
   },
+  button: {
+    color: theme.palette.text.secondary
+  }
 }));
 
 export default function Header() {
@@ -29,7 +32,6 @@ export default function Header() {
     sessionStorage.removeItem('refresh_token');
   }
 
-  console.log(username)
   return (
     <AppBar color='primary' position='static' elevation={0}>
       <Toolbar className={classes.toolbar} disableGutters>
@@ -37,17 +39,9 @@ export default function Header() {
           TEMPO
         </Typography>
         {username === 'demo' ?
-          <Button
-            onClick={() => { setUsername(null) }}
-            color="inherit">
-            login</Button> :
+          <Button className={classes.button} onClick={() => { setUsername(null) }}>login</Button> :
           username ?
-            <Button
-              onClick={logout}
-              color="inherit">
-              sign out</Button> :
-            null
-        }
+            <Button className={classes.button} onClick={logout}> sign out</Button> : null}
         <Help />
       </Toolbar>
     </AppBar>
