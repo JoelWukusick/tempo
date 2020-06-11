@@ -24,10 +24,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Header() {
   const classes = useStyles();
-  const { username, setUsername, setPage } = useContext(DataContext);
+  const { username, setUsername } = useContext(DataContext);
   const logout = () => {
     setUsername(null);
-    setPage('/');
     sessionStorage.removeItem('username');
     sessionStorage.removeItem('access_token');
     sessionStorage.removeItem('refresh_token');
@@ -40,7 +39,7 @@ export default function Header() {
           TEMPO
         </Typography>
         {username === 'demo' ?
-          <Button className={classes.button} onClick={() => { setUsername(null); setPage('/') }}>login</Button> :
+          <Button className={classes.button} onClick={() => { setUsername(null) }}>login</Button> :
           username ?
             <Button className={classes.button} onClick={logout}> sign out</Button> : null}
         <Help />
