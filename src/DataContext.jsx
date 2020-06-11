@@ -18,8 +18,8 @@ function DataContextProvider(props) {
   const [seed, setSeed] = useState({ artist: [], track: [], genre: [], min_tempo: 136, max_tempo: 142, min_danceability: .6, max_danceability: 1, min_energy: .2, max_energy: 1, min_valence: 0, max_valence: 1 })
   const [seedStack, setSeedStack] = useState([]);
   const [playlist, setPlaylist] = useState([]);
-  const [page, setPage] = useState('/');
-  const [controlScreen, setControlScreen] = useState('presets');
+  const [page, setPage] = useState(window.location.pathname === '/controls/custom' ? '/custom' : window.location.pathname);
+  const [controlScreen, setControlScreen] = useState(window.location.pathname === '/controls/custom' ? 'custom' : 'presets');
 
   return (
     <DataContext.Provider
