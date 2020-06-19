@@ -64,7 +64,6 @@ const theme = createMuiTheme({
     background: { default: '#384359', paper: '#1E2738' },
   },
   typography: {
-    fontSize: 12,
     h6: { fontSize: '16px' }
   },
   shadows: Array(25).fill('none')
