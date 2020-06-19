@@ -12,7 +12,7 @@ export default function Playlist() {
   return (
     <>
       <Container>
-          <Button size='small' onClick={() => setPage('/')} component={Link} to={'/'}><ArrowBackIcon fontSize='small' />back</Button>
+          <Button  onClick={() => setPage('/')} component={Link} to={'/'}><ArrowBackIcon fontSize='medium' />back</Button>
         {playlist.length > 0 ? <DisplayItems items={playlist} clickable={false} /> : null}
       </Container>
     </>

@@ -46,12 +46,12 @@ export default function CustomControls() {
 
   return (
     <Container>
-      <Box py={4} px={1}>
+      <Box pb={4} pt={2} px={1}>
         {controls.map(control => {
           return (
-            <>
+            <Box pb={2}>
               <Tooltip title={control.description} placement='top-start' arrow>
-                <Typography id={control.name} display='inline'>
+                <Typography variant='h6' id={control.name} display='inline'>
                   {`${control.label} `}
                   {mobile ? <TooltipMobile title={control.description} /> : null}
                 </Typography>
@@ -77,7 +77,7 @@ export default function CustomControls() {
                   }
                 }}
               />
-            </>
+            </Box>
           )
         })}
       </Box>

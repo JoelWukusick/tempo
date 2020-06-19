@@ -3,7 +3,7 @@ import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
 const theme = createMuiTheme({
   overrides: {
     MuiButton: {
-      root: { textTransform: 'none' }
+      root: { textTransform: 'none', fontSize: '10pt' }
     },
     MuiTabs: {
       indicator: { width: '8px', height: '8px' }
@@ -11,7 +11,7 @@ const theme = createMuiTheme({
     MuiTab: {
       root: {
         textTransform: 'none',
-        fontSize: '12px',
+        fontSize: '10pt',
         '&$selected': { backgroundColor: '#090D24' }
       },
       textColorInherit: { opacity: .3 }
@@ -33,12 +33,12 @@ const theme = createMuiTheme({
       root: {
         textTransform: 'none',
         padding: '0px',
-        fontSize: '10px',
+        fontSize: '10pt',
         marginRight: '7px',
         borderRadius: '12px',
         borderWidth: 0,
-        height: '24px',
-        width: '54px',
+        height: '26px',
+        width: '64px',
         backgroundColor: '#1E2738',
         '&$selected': { backgroundColor: '#3C7F8B' }
       }
@@ -47,10 +47,14 @@ const theme = createMuiTheme({
     MuiFilledInput: { input: { color: '#000' } },
     MuiSlider: {
       rail: { backgroundColor: '#090D24', opacity: '.9', height: '1px' },
-      track: { backgroundColor: '#A3B1B9', opacity: '.8'},
-      thumb: { backgroundColor: '#A3B1B9' },
-      valueLabel: { color: '#1E2738', opacity: '.9' },
-      markLabelActive: { opacity: '.7'}
+      track: { backgroundColor: '#A3B1B9', opacity: '.8' },
+      thumb: { backgroundColor: '#A3B1B9', width: '16px', height: '16px', marginTop: '-7px', marginLeft: '-8px' },
+      valueLabel: { color: '#1E2738', opacity: '.9', fontSize: '12px', width: '40px', top: -35, left: 'calc(-50% )' },
+      privateValueLabel: { offset: { '406': { top: '-44' } } },
+      markLabelActive: { opacity: '.7' }
+    },
+    MuiFab: {
+      root: { disableElevation: true }
     }
   },
   palette: {
@@ -60,8 +64,11 @@ const theme = createMuiTheme({
     background: { default: '#384359', paper: '#1E2738' },
   },
   typography: {
-    fontSize: 12
-  }
+    fontSize: 12,
+    h6: { fontSize: '16px' }
+  },
+  shadows: Array(25).fill('none')
+
 });
 
 export default responsiveFontSizes(theme);

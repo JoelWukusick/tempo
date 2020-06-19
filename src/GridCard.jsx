@@ -24,10 +24,10 @@ const useStyles = makeStyles(theme => ({
     textOverflow: 'ellipsis'
   },
   title: {
-    fontSize: '14px'
+    fontSize: '16px'
   },
   artist: {
-    fontSize: '12px'
+    fontSize: '14px'
   }
 }));
 

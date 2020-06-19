@@ -15,7 +15,7 @@ import BottomNav from './BottomNav.jsx';
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
-    height: 'calc(50vh - 120px)',
+    height: 'calc(50vh - 132px)',
     maxHeight: '112px'
   },
   content: {
@@ -36,9 +36,9 @@ const useStyles = makeStyles((theme) => ({
     height: '100vh'
   },
   verticalTab: {
-    width: '74px',
-    minWidth: '74px',
-    height: '82px',
+    width: '82px',
+    minWidth: '82px',
+    height: '94px',
   },
 }));
 

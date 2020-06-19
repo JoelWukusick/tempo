@@ -35,7 +35,7 @@ export default function Header() {
   return (
     <AppBar color='primary' position='static' elevation={0}>
       <Toolbar className={classes.toolbar} disableGutters>
-        <Typography color='inherit' variant="h5" className={classes.title}>
+        <Typography color='inherit' variant="h4" className={classes.title}>
           TEMPO
         </Typography>
         {username === 'demo' ?

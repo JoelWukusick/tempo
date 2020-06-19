@@ -6,9 +6,6 @@ import presets from './presets.js';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
-  title: {
-    fontSize: '14px'
-  },
   description: {
     fontSize: '12px',
     color: theme.palette.text.secondary
@@ -35,7 +32,7 @@ export default function PresetControls({ setOption }) {
                 <Card variant="outlined" >
                   <CardActionArea component={Link} to={'/controls/custom'} onClick={(e) => { handleSelectPreset(preset) }}>
                     <CardContent>
-                      <Typography className={classes.title} variant="h6" align='center'>
+                      <Typography variant="h6" align='center'>
                         {preset.name}
                       </Typography>
                       <Typography className={classes.description} align='center'>
